@@ -151,6 +151,11 @@ module strith_parameter
     integer(int32), public, parameter :: rightmost_digit_index = digits
         !! the rightmost position of a number in a string
 
+    integer(int32), public, parameter :: increment_from_right_to_left = sign(1, leftmost_digit_index - rightmost_digit_index)
+        !! do-loop counter increment from the rightmost index to the leftmost
+    integer(int32), public, parameter :: increment_from_left_to_right = sign(1, rightmost_digit_index - leftmost_digit_index)
+        !! do-loop counter increment from the leftmost index to the rightmost
+
     character(len=digits), public, parameter :: zero = "+"//repeat("0", digits - 1)
         !! the constant representing 0
 end module strith_parameter
