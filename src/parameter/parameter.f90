@@ -146,7 +146,7 @@ module strith_parameter
         !! weights of corresponding digits
     integer(int32), public, parameter :: digits = len(weights_of_digits(0))
         !! length of a string
-    integer(int32), public, parameter :: most_significant_digit_index = 2
+    integer(int32), public, parameter :: leftmost_digit_index = 2
         !! the leftmost position of a number in a string
     integer(int32), public, parameter :: rightmost_digit_index = digits
         !! the rightmost position of a number in a string
