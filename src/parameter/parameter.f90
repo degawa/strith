@@ -12,11 +12,8 @@ module strith_parameter
     character(1), public, parameter :: sign_symbols(*) = [plus_sign, minus_sign]
         !! the sign symbols
 
-    integer(int32), public, parameter :: most_significant_digit_index = 2
-        !! the leftmost position of a number in a string
     character(1), public, parameter :: number(0:*) = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         !! characters composing a string
-
     character(*), public, parameter :: weights_of_digits(0:*) = ["+000000000000000000000000000000000000001", &
                                                                  "+000000000000000000000000000000000000002", &
                                                                  "+000000000000000000000000000000000000004", &
@@ -149,6 +146,8 @@ module strith_parameter
         !! weights of corresponding digits
     integer(int32), public, parameter :: digits = len(weights_of_digits(0))
         !! length of a string
+    integer(int32), public, parameter :: most_significant_digit_index = 2
+        !! the leftmost position of a number in a string
 
     character(len=digits), public, parameter :: zero = "+"//repeat("0", digits - 1)
         !! the constant representing 0
