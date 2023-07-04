@@ -2,9 +2,15 @@ module strith_arithmetic_comparision_equal
     use :: strith_parameter
     implicit none
     private
-    public :: is_equal
-    public :: is_not_equal
+    public :: operator(.streq.)
+    public :: operator(.strne.)
 
+    interface operator(.streq.)
+        procedure :: is_equal
+    end interface
+    interface operator(.strne.)
+        procedure :: is_not_equal
+    end interface
 contains
     logical function is_equal(a, b)
         implicit none

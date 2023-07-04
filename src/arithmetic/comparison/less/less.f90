@@ -7,9 +7,16 @@ module strith_arithmetic_comparision_less
     use :: strith_arithmetic_comparision_equal
     implicit none
     private
-    public :: is_less_than
-    public :: is_less_than_or_equal_to
+    public :: operator(.strlt.)
+    public :: operator(.strle.)
 
+    interface operator(.strlt.)
+        procedure :: is_less_than
+    end interface
+
+    interface operator(.strle.)
+        procedure :: is_less_than_or_equal_to
+    end interface
 contains
     ! returns `.true.` if `a < b`
     function is_less_than(a, b) result(lt)
@@ -45,6 +52,6 @@ contains
         character(len=digits), intent(in) :: b
         logical :: le
 
-        le = is_less_than(a, b) .or. is_equal(a, b)
+        le = is_less_than(a, b) .or. (a.streq.b)
     end function is_less_than_or_equal_to
 end module strith_arithmetic_comparision_less

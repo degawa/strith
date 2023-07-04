@@ -7,9 +7,16 @@ module strith_arithmetic_comparision_greater
     use :: strith_arithmetic_comparision_equal
     implicit none
     private
-    public :: is_greater_than
-    public :: is_greater_than_or_equal_to
+    public :: operator(.strgt.)
+    public :: operator(.strge.)
 
+    interface operator(.strgt.)
+        procedure :: is_greater_than
+    end interface
+
+    interface operator(.strge.)
+        procedure :: is_greater_than_or_equal_to
+    end interface
 contains
     ! returns `.true.` if `a > b`
     function is_greater_than(a, b) result(gt)
@@ -45,6 +52,6 @@ contains
         character(len=digits), intent(in) :: b
         logical :: ge
 
-        ge = is_greater_than(a, b) .or. is_equal(a, b)
+        ge = is_greater_than(a, b) .or. (a.streq.b)
     end function is_greater_than_or_equal_to
 end module strith_arithmetic_comparision_greater

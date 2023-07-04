@@ -42,74 +42,74 @@ program test_greater
     end if
 
     !---
-    if (is_greater_than(weights_of_digits(3), weights_of_digits(2))) then
+    if ((weights_of_digits(3) .strgt.weights_of_digits(2))) then
         print *, "PASSED: 8>4 is .true."
     else
         print *, "FAILED: expect that 8>4 is .true., but got .false."
     end if
 
-    if (is_greater_than(weights_of_digits(2), weights_of_digits(3)) .eqv. .false.) then
+    if ((weights_of_digits(2) .strgt.weights_of_digits(3)) .eqv. .false.) then
         print *, "PASSED: 4>8 is .false."
     else
         print *, "FAILED: expect that 4>8 is .false., but got .true."
     end if
 
-    if (is_greater_than(weights_of_digits(3), weights_of_digits(3)) .eqv. .false.) then
+    if ((weights_of_digits(3) .strgt.weights_of_digits(3)) .eqv. .false.) then
         print *, "PASSED: 8>8 is .false."
     else
         print *, "FAILED: expect that 8>8 is .false., but got .true."
     end if
 
-    if (is_greater_than(-weights_of_digits(2), -weights_of_digits(3)) .eqv. .true.) then
+    if ((-weights_of_digits(2) .strgt.-weights_of_digits(3)) .eqv. .true.) then
         print *, "PASSED: -4>-8 is .true."
     else
         print *, "FAILED: expect that -4>-8 is .true., but got .false."
     end if
 
-    if (is_greater_than(-weights_of_digits(3), -weights_of_digits(2)) .eqv. .false.) then
+    if ((-weights_of_digits(3) .strgt.-weights_of_digits(2)) .eqv. .false.) then
         print *, "PASSED: -8>-4 is .false."
     else
         print *, "FAILED: expect that -8>-4 is .false., but got .true."
     end if
 
-    if (is_greater_than(-weights_of_digits(3), -weights_of_digits(3)) .eqv. .false.) then
+    if ((-weights_of_digits(3) .strgt.-weights_of_digits(3)) .eqv. .false.) then
         print *, "PASSED: -8>-8 is .false."
     else
         print *, "FAILED: expect that -8>-8 is .false., but got .true."
     end if
 
     !---
-    if (is_greater_than_or_equal_to(weights_of_digits(3), weights_of_digits(2))) then
+    if ((weights_of_digits(3) .strge.weights_of_digits(2))) then
         print *, "PASSED: 8>=4 is .true."
     else
         print *, "FAILED: expect that 8>=4 is .true., but got .false."
     end if
 
-    if (is_greater_than_or_equal_to(weights_of_digits(2), weights_of_digits(3)) .eqv. .false.) then
+    if ((weights_of_digits(2) .strge.weights_of_digits(3)) .eqv. .false.) then
         print *, "PASSED: 4>=8 is .false."
     else
         print *, "FAILED: expect that 4>=8 is .false., but got .true."
     end if
 
-    if (is_greater_than_or_equal_to(weights_of_digits(3), weights_of_digits(3)) .eqv. .true.) then
+    if ((weights_of_digits(3) .strge.weights_of_digits(3)) .eqv. .true.) then
         print *, "PASSED: 8>=8 is .true."
     else
         print *, "FAILED: expect that 8>=8 is .true., but got .false."
     end if
 
-    if (is_greater_than_or_equal_to(-weights_of_digits(2), -weights_of_digits(3)) .eqv. .true.) then
+    if ((-weights_of_digits(2) .strge.-weights_of_digits(3)) .eqv. .true.) then
         print *, "PASSED: -4>=-8 is .true."
     else
         print *, "FAILED: expect that -4>=-8 is .true., but got .false."
     end if
 
-    if (is_greater_than_or_equal_to(-weights_of_digits(3), -weights_of_digits(2)) .eqv. .false.) then
+    if ((-weights_of_digits(3) .strge.-weights_of_digits(2)) .eqv. .false.) then
         print *, "PASSED: -8>=-4 is .false."
     else
         print *, "FAILED: expect that -8>=-4 is .false., but got .true."
     end if
 
-    if (is_greater_than_or_equal_to(-weights_of_digits(3), -weights_of_digits(3)) .eqv. .true.) then
+    if ((-weights_of_digits(3) .strge.-weights_of_digits(3)) .eqv. .true.) then
         print *, "PASSED: -8>=-8 is .true."
     else
         print *, "FAILED: expect that -8>=-8 is .true., but got .false."
