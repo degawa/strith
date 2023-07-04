@@ -148,6 +148,8 @@ module strith_parameter
         !! length of a string
     integer(int32), public, parameter :: most_significant_digit_index = 2
         !! the leftmost position of a number in a string
+    integer(int32), public, parameter :: rightmost_digit_index = digits
+        !! the rightmost position of a number in a string
 
     character(len=digits), public, parameter :: zero = "+"//repeat("0", digits - 1)
         !! the constant representing 0
