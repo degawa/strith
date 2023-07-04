@@ -12,7 +12,7 @@ module strith_parameter
     character(1), public, parameter :: sign_symbols(*) = [plus_sign, minus_sign]
         !! the sign symbols
 
-    character(1), public, parameter :: number(0:*) = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    character(1), public, parameter :: number_symbols(0:*) = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         !! characters composing a string
     character(*), public, parameter :: weights_of_digits(0:*) = ["+000000000000000000000000000000000000001", &
                                                                  "+000000000000000000000000000000000000002", &
