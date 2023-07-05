@@ -15,9 +15,9 @@ contains
         character(len=digits), intent(in) :: b
         character(len=digits) :: sub
 
-        if (a.strge.b) then
+        if (a.strithge.b) then
             sub = sub_core(a, b)
-        else if (a.strlt.b) then
+        else if (a.strithlt.b) then
             sub = -(sub_core(b, a))
         end if
     end function sub_ge0_ge0

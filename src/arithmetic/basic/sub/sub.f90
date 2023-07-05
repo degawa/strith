@@ -22,22 +22,22 @@ contains
         character(len=digits), intent(in) :: b
         character(len=digits) :: sub
 
-        if ((a.strge.zero) .and. (b.strge.zero)) then
+        if ((a.strithge.zero) .and. (b.strithge.zero)) then
             sub = sub_ge0_ge0(a, b)
             return
         end if
 
-        if ((a.strlt.zero) .and. (b.strlt.zero)) then
+        if ((a.strithlt.zero) .and. (b.strithlt.zero)) then
             sub = sub_lt0_lt0(a, b)
             return
         end if
 
-        if ((a.strge.zero) .and. (b.strlt.zero)) then
+        if ((a.strithge.zero) .and. (b.strithlt.zero)) then
             sub = sub_ge0_lt0(a, b)
             return
         end if
 
-        if ((a.strlt.zero) .and. (b.strge.zero)) then
+        if ((a.strithlt.zero) .and. (b.strithge.zero)) then
             sub = sub_lt0_ge0(a, b)
             return
         end if

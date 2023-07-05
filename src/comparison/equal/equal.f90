@@ -2,13 +2,13 @@ module strith_comparision_equal
     use :: strith_parameter
     implicit none
     private
-    public :: operator(.streq.)
-    public :: operator(.strne.)
+    public :: operator(.stritheq.)
+    public :: operator(.strithne.)
 
-    interface operator(.streq.)
+    interface operator(.stritheq.)
         procedure :: is_equal
     end interface
-    interface operator(.strne.)
+    interface operator(.strithne.)
         procedure :: is_not_equal
     end interface
 contains

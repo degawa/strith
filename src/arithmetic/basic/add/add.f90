@@ -21,22 +21,22 @@ contains
         character(len=digits), intent(in) :: b
         character(len=digits) :: add
 
-        if ((a.strge.zero) .and. (b.strge.zero)) then
+        if ((a.strithge.zero) .and. (b.strithge.zero)) then
             add = add_ge0_ge0(a, b)
             return
         end if
 
-        if ((a.strlt.zero) .and. (b.strlt.zero)) then
+        if ((a.strithlt.zero) .and. (b.strithlt.zero)) then
             add = add_lt0_lt0(a, b)
             return
         end if
 
-        if ((a.strge.zero) .and. (b.strlt.zero)) then
+        if ((a.strithge.zero) .and. (b.strithlt.zero)) then
             add = add_ge0_lt0(a, b)
             return
         end if
 
-        if ((a.strlt.zero) .and. (b.strge.zero)) then
+        if ((a.strithlt.zero) .and. (b.strithge.zero)) then
             add = add_lt0_ge0(a, b)
             return
         end if

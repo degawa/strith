@@ -7,14 +7,14 @@ module strith_comparision_less
     use :: strith_comparision_equal
     implicit none
     private
-    public :: operator(.strlt.)
-    public :: operator(.strle.)
+    public :: operator(.strithlt.)
+    public :: operator(.strithle.)
 
-    interface operator(.strlt.)
+    interface operator(.strithlt.)
         procedure :: is_less_than
     end interface
 
-    interface operator(.strle.)
+    interface operator(.strithle.)
         procedure :: is_less_than_or_equal_to
     end interface
 contains
@@ -52,6 +52,6 @@ contains
         character(len=digits), intent(in) :: b
         logical :: le
 
-        le = is_less_than(a, b) .or. (a.streq.b)
+        le = is_less_than(a, b) .or. (a.stritheq.b)
     end function is_less_than_or_equal_to
 end module strith_comparision_less

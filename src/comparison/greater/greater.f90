@@ -7,14 +7,14 @@ module strith_comparision_greater
     use :: strith_comparision_equal
     implicit none
     private
-    public :: operator(.strgt.)
-    public :: operator(.strge.)
+    public :: operator(.strithgt.)
+    public :: operator(.strithge.)
 
-    interface operator(.strgt.)
+    interface operator(.strithgt.)
         procedure :: is_greater_than
     end interface
 
-    interface operator(.strge.)
+    interface operator(.strithge.)
         procedure :: is_greater_than_or_equal_to
     end interface
 contains
@@ -52,6 +52,6 @@ contains
         character(len=digits), intent(in) :: b
         logical :: ge
 
-        ge = is_greater_than(a, b) .or. (a.streq.b)
+        ge = is_greater_than(a, b) .or. (a.stritheq.b)
     end function is_greater_than_or_equal_to
 end module strith_comparision_greater
