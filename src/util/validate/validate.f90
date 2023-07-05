@@ -1,12 +1,12 @@
-module strith_util_validate
+module strith_util_isValid
     use, intrinsic :: iso_fortran_env
     use :: strith_parameter
     implicit none
     private
-    public :: validate
+    public :: is_valid
 
 contains
-    logical function validate(a)
+    logical function is_valid(a)
         implicit none
         character(len=digits), intent(in) :: a
         character(:), allocatable :: sign_set, number_set
@@ -22,9 +22,9 @@ contains
             number_set = number_set//number_symbols(c)
         end do
 
-        validate = all([ &
+        is_valid = all([ &
                        verify(a(sign_index:sign_index), sign_set) == 0, &
                        verify(a(leftmost_digit_index:rightmost_digit_index), number_set) == 0 &
                        ])
-    end function validate
-end module strith_util_validate
+    end function is_valid
+end module strith_util_isValid
