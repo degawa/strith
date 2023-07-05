@@ -1,6 +1,6 @@
 program test_toString
     use, intrinsic :: iso_fortran_env
-    use :: strith_toString
+    use :: strith_util_toString
     implicit none
 
     character(:), allocatable :: str

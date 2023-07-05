@@ -1,6 +1,6 @@
 program test_validate
     use, intrinsic :: iso_fortran_env
-    use :: strith_validate
+    use :: strith_util_validate
     use :: strith_parameter
     use :: strith_arithmetic_op_unary_negate
     implicit none

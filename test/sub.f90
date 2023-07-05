@@ -4,7 +4,7 @@ program test_sub
     use :: strith_arithmetic_basic_core_sub
     use :: strith_arithmetic_basic_sub
     use :: strith_arithmetic_op_unary_negate
-    use :: strith_toString
+    use :: strith_util_toString
     implicit none
 
     character(len=digits) :: a, b, sub

@@ -1,4 +1,4 @@
-module strith_validate
+module strith_util_validate
     use, intrinsic :: iso_fortran_env
     use :: strith_parameter
     implicit none
@@ -27,4 +27,4 @@ contains
                        verify(a(leftmost_digit_index:rightmost_digit_index), number_set) == 0 &
                        ])
     end function validate
-end module strith_validate
+end module strith_util_validate

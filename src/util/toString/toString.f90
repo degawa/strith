@@ -1,4 +1,4 @@
-module strith_toString
+module strith_util_toString
     use, intrinsic :: iso_fortran_env
     use :: strith_parameter
     use :: strith_arithmetic_basic_add
@@ -153,4 +153,4 @@ contains
             optval = default
         end if
     end function optval
-end module strith_toString
+end module strith_util_toString
