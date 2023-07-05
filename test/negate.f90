@@ -1,6 +1,6 @@
 program test_negate
     use :: strith_parameter
-    use :: strith_arithmetic_op_unary_negate
+    use :: strith_arithmetic_unary_negate
     implicit none
 
     character(:), allocatable :: str

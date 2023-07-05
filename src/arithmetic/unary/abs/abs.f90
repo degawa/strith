@@ -1,4 +1,4 @@
-module strith_arithmetic_op_unary_abs
+module strith_arithmetic_unary_abs
     use :: strith_parameter
     implicit none
     private
@@ -16,4 +16,4 @@ contains
         abs_a = a
         abs_a(sign_index:sign_index) = "+"
     end function abs_str
-end module strith_arithmetic_op_unary_abs
+end module strith_arithmetic_unary_abs

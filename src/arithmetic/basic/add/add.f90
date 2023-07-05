@@ -5,8 +5,8 @@ module strith_arithmetic_basic_add
     use :: strith_arithmetic_basic_add_ge0Lt0
     use :: strith_arithmetic_basic_add_lt0Ge0
     use :: strith_arithmetic_basic_add_lt0Lt0
-    use :: strith_arithmetic_comparision_greater
-    use :: strith_arithmetic_comparision_less
+    use :: strith_comparision_greater
+    use :: strith_comparision_less
     implicit none
     private
     public :: operator(+)

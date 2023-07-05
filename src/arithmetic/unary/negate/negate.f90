@@ -1,4 +1,4 @@
-module strith_arithmetic_op_unary_negate
+module strith_arithmetic_unary_negate
     use :: strith_parameter
     implicit none
     private
@@ -26,4 +26,4 @@ contains
             minus_a = zero
         end select
     end function negate_str
-end module strith_arithmetic_op_unary_negate
+end module strith_arithmetic_unary_negate

@@ -1,4 +1,4 @@
-module strith_arithmetic_comparision_equal
+module strith_comparision_equal
     use :: strith_parameter
     implicit none
     private
@@ -27,4 +27,4 @@ contains
 
         is_not_equal = .not. is_equal(a, b)
     end function is_not_equal
-end module strith_arithmetic_comparision_equal
+end module strith_comparision_equal

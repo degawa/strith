@@ -1,8 +1,8 @@
 program test_less
     use :: strith_parameter
-    use :: strith_arithmetic_comparision_core_less
-    use :: strith_arithmetic_comparision_less
-    use :: strith_arithmetic_op_unary_negate
+    use :: strith_comparision_core_less
+    use :: strith_comparision_less
+    use :: strith_arithmetic_unary_negate
     implicit none
 
     if (is_less_without_considering_sign(weights_of_digits(3), weights_of_digits(4))) then

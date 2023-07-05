@@ -1,8 +1,8 @@
 module strith_arithmetic_basic_sub
     use, intrinsic :: iso_fortran_env
     use :: strith_parameter
-    use :: strith_arithmetic_comparision_greater
-    use :: strith_arithmetic_comparision_less
+    use :: strith_comparision_greater
+    use :: strith_comparision_less
     use :: strith_arithmetic_basic_sub_ge0Ge0
     use :: strith_arithmetic_basic_sub_ge0Lt0
     use :: strith_arithmetic_basic_sub_lt0Ge0

@@ -1,6 +1,6 @@
 program test_abs
-    use :: strith_arithmetic_op_unary_abs
-    use :: strith_arithmetic_op_unary_negate
+    use :: strith_arithmetic_unary_abs
+    use :: strith_arithmetic_unary_negate
     use :: strith_parameter
     implicit none
 

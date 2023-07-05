@@ -1,10 +1,10 @@
-module strith_arithmetic_comparision_less
+module strith_comparision_less
     use, intrinsic :: iso_fortran_env
     use :: strith_parameter
-    use :: strith_arithmetic_op_unary_abs
-    use :: strith_arithmetic_comparision_core_greater
-    use :: strith_arithmetic_comparision_core_less
-    use :: strith_arithmetic_comparision_equal
+    use :: strith_arithmetic_unary_abs
+    use :: strith_comparision_core_greater
+    use :: strith_comparision_core_less
+    use :: strith_comparision_equal
     implicit none
     private
     public :: operator(.strlt.)
@@ -54,4 +54,4 @@ contains
 
         le = is_less_than(a, b) .or. (a.streq.b)
     end function is_less_than_or_equal_to
-end module strith_arithmetic_comparision_less
+end module strith_comparision_less

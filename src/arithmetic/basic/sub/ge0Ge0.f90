@@ -1,9 +1,9 @@
 module strith_arithmetic_basic_sub_ge0Ge0
     use :: strith_parameter
     use :: strith_arithmetic_basic_core_sub
-    use :: strith_arithmetic_comparision_greater
-    use :: strith_arithmetic_comparision_less
-    use :: strith_arithmetic_op_unary_negate
+    use :: strith_comparision_greater
+    use :: strith_comparision_less
+    use :: strith_arithmetic_unary_negate
     implicit none
     private
     public :: sub_ge0_ge0

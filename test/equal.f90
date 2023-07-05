@@ -1,8 +1,8 @@
 program test_equal
     use, intrinsic :: iso_fortran_env
     use :: strith_parameter
-    use :: strith_arithmetic_comparision_equal
-    use :: strith_arithmetic_op_unary_negate
+    use :: strith_comparision_equal
+    use :: strith_arithmetic_unary_negate
     implicit none
 
     if ((weights_of_digits(3) .streq.weights_of_digits(3))) then

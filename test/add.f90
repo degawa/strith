@@ -3,7 +3,7 @@ program test_add
     use :: strith_parameter
     use :: strith_arithmetic_basic_core_add
     use :: strith_arithmetic_basic_add
-    use :: strith_arithmetic_op_unary_negate
+    use :: strith_arithmetic_unary_negate
     use :: strith_util_toString
     implicit none
 

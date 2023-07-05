@@ -1,7 +1,7 @@
 module strith_arithmetic_basic_sub_ge0Lt0
     use :: strith_parameter
     use :: strith_arithmetic_basic_core_add
-    use :: strith_arithmetic_op_unary_abs
+    use :: strith_arithmetic_unary_abs
     implicit none
     private
     public :: sub_ge0_lt0

@@ -1,8 +1,8 @@
 program test_greater
     use :: strith_parameter
-    use :: strith_arithmetic_comparision_core_greater
-    use :: strith_arithmetic_comparision_greater
-    use :: strith_arithmetic_op_unary_negate
+    use :: strith_comparision_core_greater
+    use :: strith_comparision_greater
+    use :: strith_arithmetic_unary_negate
     implicit none
 
     if (is_greater_without_considering_sign(weights_of_digits(3), weights_of_digits(2))) then

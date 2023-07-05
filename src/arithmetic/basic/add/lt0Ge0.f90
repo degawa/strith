@@ -1,6 +1,6 @@
 module strith_arithmetic_basic_add_lt0Ge0
     use :: strith_parameter
-    use :: strith_arithmetic_op_unary_abs
+    use :: strith_arithmetic_unary_abs
     use :: strith_arithmetic_basic_sub_ge0Ge0
     implicit none
     private

@@ -2,7 +2,7 @@ program test_validate
     use, intrinsic :: iso_fortran_env
     use :: strith_util_isValid
     use :: strith_parameter
-    use :: strith_arithmetic_op_unary_negate
+    use :: strith_arithmetic_unary_negate
     implicit none
     character(:), allocatable :: str
 

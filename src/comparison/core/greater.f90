@@ -1,7 +1,7 @@
-module strith_arithmetic_comparision_core_greater
+module strith_comparision_core_greater
     use, intrinsic :: iso_fortran_env
     use :: strith_parameter
-    use :: strith_arithmetic_op_unary_abs
+    use :: strith_arithmetic_unary_abs
     implicit none
     private
     public :: is_greater_without_considering_sign
@@ -32,4 +32,4 @@ contains
             end if
         end do
     end function is_greater_without_considering_sign
-end module strith_arithmetic_comparision_core_greater
+end module strith_comparision_core_greater

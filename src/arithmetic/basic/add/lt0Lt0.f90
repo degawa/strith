@@ -1,8 +1,8 @@
 module strith_arithmetic_basic_add_lt0Lt0
     use :: strith_parameter
     use :: strith_arithmetic_basic_core_add
-    use :: strith_arithmetic_op_unary_abs
-    use :: strith_arithmetic_op_unary_negate
+    use :: strith_arithmetic_unary_abs
+    use :: strith_arithmetic_unary_negate
     implicit none
     private
     public :: add_lt0_lt0
