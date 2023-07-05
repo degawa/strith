@@ -16,7 +16,7 @@ contains
         integer(int32) :: d, num_at_d_in_a, num_at_d_in_b
 
         is_less = .false.
-        do d = leftmost_digit_index, digits
+        do d = leftmost_digit_index, rightmost_digit_index, increment_from_left_to_right
             read (a(d:d), '(I1)') num_at_d_in_a
             read (b(d:d), '(I1)') num_at_d_in_b
 
