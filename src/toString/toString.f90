@@ -14,6 +14,7 @@ module strith_toString
         procedure :: to_string_int64
     end interface
 
+    logical, private, parameter :: remove_0_padding_default = .false.
 contains
     function to_string_int8(i8, remove_0_padding) result(str)
         implicit none
@@ -32,8 +33,8 @@ contains
             end if
         end do
 
-        if (present(remove_0_padding)) then
-            if (remove_0_padding) str = remove_zero_padding(str)
+        if (optval(remove_0_padding, remove_0_padding_default)) then
+            str = remove_zero_padding(str)
         end if
     end function to_string_int8
 
@@ -54,8 +55,8 @@ contains
             end if
         end do
 
-        if (present(remove_0_padding)) then
-            if (remove_0_padding) str = remove_zero_padding(str)
+        if (optval(remove_0_padding, remove_0_padding_default)) then
+            str = remove_zero_padding(str)
         end if
     end function to_string_int16
 
@@ -76,8 +77,8 @@ contains
             end if
         end do
 
-        if (present(remove_0_padding)) then
-            if (remove_0_padding) str = remove_zero_padding(str)
+        if (optval(remove_0_padding, remove_0_padding_default)) then
+            str = remove_zero_padding(str)
         end if
     end function to_string_int32
 
@@ -98,8 +99,20 @@ contains
             end if
         end do
 
-        if (present(remove_0_padding)) then
-            if (remove_0_padding) str = remove_zero_padding(str)
+        if (optval(remove_0_padding, remove_0_padding_default)) then
+            str = remove_zero_padding(str)
         end if
     end function to_string_int64
+
+    logical function optval(x, default)
+        implicit none
+        logical, intent(in), optional :: x
+        logical, intent(in) :: default
+
+        if (present(x)) then
+            optval = x
+        else
+            optval = default
+        end if
+    end function optval
 end module strith_toString
