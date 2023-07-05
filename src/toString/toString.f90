@@ -32,17 +32,7 @@ contains
         end do
 
         if (present(remove_heading_0)) then
-            if (remove_heading_0) then
-                block
-                    integer(int32) :: pos_0
-                    pos_0 = index(str, "0")
-                    do while (pos_0 == leftmost_digit_index)
-                        str = str(sign_index:sign_index)//str(leftmost_digit_index + 1:)
-                        pos_0 = index(str, "0")
-                    end do
-                    if (str(sign_index:sign_index) == "+") str = str(leftmost_digit_index:)
-                end block
-            end if
+            if (remove_heading_0) str = remove_zero_padding(str)
         end if
     end function to_string_int8
 
@@ -64,17 +54,7 @@ contains
         end do
 
         if (present(remove_heading_0)) then
-            if (remove_heading_0) then
-                block
-                    integer(int32) :: pos_0
-                    pos_0 = index(str, "0")
-                    do while (pos_0 == leftmost_digit_index)
-                        str = str(sign_index:sign_index)//str(leftmost_digit_index + 1:)
-                        pos_0 = index(str, "0")
-                    end do
-                    if (str(sign_index:sign_index) == "+") str = str(leftmost_digit_index:)
-                end block
-            end if
+            if (remove_heading_0) str = remove_zero_padding(str)
         end if
     end function to_string_int16
 
@@ -96,17 +76,7 @@ contains
         end do
 
         if (present(remove_heading_0)) then
-            if (remove_heading_0) then
-                block
-                    integer(int32) :: pos_0
-                    pos_0 = index(str, "0")
-                    do while (pos_0 == leftmost_digit_index)
-                        str = str(sign_index:sign_index)//str(leftmost_digit_index + 1:)
-                        pos_0 = index(str, "0")
-                    end do
-                    if (str(sign_index:sign_index) == "+") str = str(leftmost_digit_index:)
-                end block
-            end if
+            if (remove_heading_0) str = remove_zero_padding(str)
         end if
     end function to_string_int32
 
@@ -128,17 +98,7 @@ contains
         end do
 
         if (present(remove_heading_0)) then
-            if (remove_heading_0) then
-                block
-                    integer(int32) :: pos_0
-                    pos_0 = index(str, "0")
-                    do while (pos_0 == leftmost_digit_index)
-                        str = str(sign_index:sign_index)//str(leftmost_digit_index + 1:)
-                        pos_0 = index(str, "0")
-                    end do
-                    if (str(sign_index:sign_index) == "+") str = str(leftmost_digit_index:)
-                end block
-            end if
+            if (remove_heading_0) str = remove_zero_padding(str)
         end if
     end function to_string_int64
 end module strith_toString
