@@ -34,4 +34,7 @@ module strith
     public :: weights_of_digits
     public :: digits
     public :: zero
+
+    ! interfaces
+    public :: Iudt_to_string
 end module strith
