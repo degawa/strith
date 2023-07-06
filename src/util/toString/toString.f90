@@ -7,12 +7,23 @@ module strith_util_toString
     implicit none
     private
     public :: to_string
+    public :: Iudt_to_string
 
     interface to_string
         procedure :: to_string_int8
         procedure :: to_string_int16
         procedure :: to_string_int32
         procedure :: to_string_int64
+        procedure :: to_string_user_defined
+    end interface
+
+    interface
+        subroutine Iudt_to_string(var, as_unsigned, str)
+            use :: strith_parameter, only:digits
+            class(*), intent(in) :: var
+            logical, intent(in) :: as_unsigned
+            character(len=digits), intent(inout) :: str
+        end subroutine Iudt_to_string
     end interface
 
     logical, private, parameter :: remove_0_padding_default = .false.
@@ -141,6 +152,23 @@ contains
             str = remove_zero_padding(str)
         end if
     end function to_string_int64
+
+    function to_string_user_defined(var, udt_to_string, remove_0_padding, as_unsigned) result(str)
+        implicit none
+        class(*), intent(in) :: var
+        procedure(Iudt_to_string) :: udt_to_string
+        logical, intent(in), optional :: remove_0_padding
+        logical, intent(in), optional :: as_unsigned
+        character(:), allocatable :: str
+
+        allocate (str, source=zero)
+
+        call udt_to_string(var, optval(as_unsigned, as_unsigned_default), str)
+
+        if (optval(remove_0_padding, remove_0_padding_default)) then
+            str = remove_zero_padding(str)
+        end if
+    end function to_string_user_defined
 
     logical function optval(x, default)
         implicit none
