@@ -7,15 +7,15 @@ program test_negate
 
     str = -weights_of_digits(1)
     if (str == "-000000000000000000000000000000000000002") then
-        print *, "PASSED: negate of positive value"
+        print '(A)', "✅PASSED: negate of positive value"
     else
-        print *, "FAILED: negate of positive value. expected -000000000000000000000000000000000000002 but got"//str
+        print '(A)', "🔥FAILED: negate of positive value. expected -000000000000000000000000000000000000002 but got"//str
     end if
 
     str = -str
     if (str == "+000000000000000000000000000000000000002") then
-        print *, "PASSED: negate of negative value"
+        print '(A)', "✅PASSED: negate of negative value"
     else
-        print *, "FAILED: negate of negative value. expected +000000000000000000000000000000000000002 but got"//str
+        print '(A)', "🔥FAILED: negate of negative value. expected +000000000000000000000000000000000000002 but got"//str
     end if
 end program test_negate

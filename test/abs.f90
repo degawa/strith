@@ -9,17 +9,17 @@ program test_abs
     str = -weights_of_digits(8)
     str = abs(str)
     if (str == "+000000000000000000000000000000000000256") then
-        print *, "PASSED: abs(negative value) returns the positive value"
+        print '(A)', "✅PASSED: abs(negative value) returns the positive value"
     else
-        print *, "FAILED: abs(negative value) returns the positive value. "// &
+        print '(A)', "🔥FAILED: abs(negative value) returns the positive value. "// &
             "expected +000000000000000000000000000000000000256 but got "//str
     end if
 
     str = weights_of_digits(8)
     if (str == "+000000000000000000000000000000000000256") then
-        print *, "PASSED: abs(positive value) returns the positive value"
+        print '(A)', "✅PASSED: abs(positive value) returns the positive value"
     else
-        print *, "FAILED: abs(positive value) returns the positive value. "// &
+        print '(A)', "🔥FAILED: abs(positive value) returns the positive value. "// &
             "expected +000000000000000000000000000000000000256 but got "//str
     end if
 end program test_abs
