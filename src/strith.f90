@@ -10,8 +10,12 @@ module strith
     use :: strith_util_toString
     use :: strith_util_isValid
     use :: strith_util_removeZeroPadding
+    use :: strith_type_strint
     implicit none
     private
+    ! user-defined type
+    public :: strint_type
+
     ! utility procedures
     public :: to_string
     public :: is_valid
