@@ -1,5 +1,5 @@
 name = "strith"
-version = "0.1.0"
+version = "1.0.0"
 license = "license"
 author = "Tomohiro Degawa"
 maintainer = "degawa.tomohiro@gmail.com"
@@ -11,4 +11,4 @@ auto-tests = true
 auto-examples = true
 
 [install]
-library = false
+library = true
