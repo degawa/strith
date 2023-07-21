@@ -8,6 +8,7 @@ module strith
     use :: strith_comparision_greater
     use :: strith_comparision_less
     use :: strith_util_toString
+    use :: strith_util_toInt
     use :: strith_util_isValid
     use :: strith_util_removeZeroPadding
     use :: strith_type_strint
@@ -18,6 +19,10 @@ module strith
 
     ! utility procedures
     public :: to_string
+    public :: to_int8
+    public :: to_int16
+    public :: to_int32
+    public :: to_int64
     public :: is_valid
     public :: remove_zero_padding
 
