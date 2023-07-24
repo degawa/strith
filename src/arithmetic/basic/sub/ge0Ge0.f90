@@ -9,7 +9,7 @@ module strith_arithmetic_basic_sub_ge0Ge0
     public :: sub_ge0_ge0
 
 contains
-    function sub_ge0_ge0(a, b) result(sub)
+    pure elemental function sub_ge0_ge0(a, b) result(sub)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

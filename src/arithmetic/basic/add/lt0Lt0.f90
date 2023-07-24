@@ -8,7 +8,7 @@ module strith_arithmetic_basic_add_lt0Lt0
     public :: add_lt0_lt0
 
 contains
-    function add_lt0_lt0(a, b) result(add)
+    pure elemental function add_lt0_lt0(a, b) result(add)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

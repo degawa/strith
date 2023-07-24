@@ -6,7 +6,7 @@ module strith_util_isValid
     public :: is_valid
 
 contains
-    logical function is_valid(a)
+    pure elemental logical function is_valid(a)
         implicit none
         character(len=digits), intent(in) :: a
 
@@ -16,7 +16,7 @@ contains
                        ])
     end function is_valid
 
-    logical function is_contained(a, set_of_characters)
+    pure elemental logical function is_contained(a, set_of_characters)
         implicit none
         character(*), intent(in) :: a
         character(*), intent(in) :: set_of_characters

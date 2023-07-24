@@ -10,7 +10,7 @@ module strith_util_toInt
     public :: to_int8, to_int16, to_int32, to_int64
 
 contains
-    function to_int8(str) result(i8)
+    pure elemental function to_int8(str) result(i8)
         implicit none
         character(len=digits), intent(in) :: str
         integer(int8) :: i8
@@ -24,7 +24,7 @@ contains
         end if
     end function to_int8
 
-    function to_int16(str) result(i16)
+    pure elemental function to_int16(str) result(i16)
         implicit none
         character(len=digits), intent(in) :: str
         integer(int16) :: i16
@@ -38,7 +38,7 @@ contains
         end if
     end function to_int16
 
-    function to_int32(str) result(i32)
+    pure elemental function to_int32(str) result(i32)
         implicit none
         character(len=digits), intent(in) :: str
         integer(int32) :: i32
@@ -52,7 +52,7 @@ contains
         end if
     end function to_int32
 
-    function to_int64(str) result(i64)
+    pure elemental function to_int64(str) result(i64)
         implicit none
         character(len=digits), intent(in) :: str
         integer(int64) :: i64

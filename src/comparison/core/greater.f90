@@ -7,7 +7,7 @@ module strith_comparision_core_greater
     public :: is_greater_without_considering_sign
 
 contains
-    function is_greater_without_considering_sign(a, b) result(is_greater)
+    pure elemental function is_greater_without_considering_sign(a, b) result(is_greater)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

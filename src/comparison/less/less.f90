@@ -19,7 +19,7 @@ module strith_comparision_less
     end interface
 contains
     ! returns `.true.` if `a < b`
-    function is_less_than(a, b) result(lt)
+    pure elemental function is_less_than(a, b) result(lt)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b
@@ -46,7 +46,7 @@ contains
     end function is_less_than
 
     ! returns `.true.` if `a <= b`
-    function is_less_than_or_equal_to(a, b) result(le)
+    pure elemental function is_less_than_or_equal_to(a, b) result(le)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

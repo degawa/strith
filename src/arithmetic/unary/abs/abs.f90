@@ -8,7 +8,7 @@ module strith_arithmetic_unary_abs
         procedure :: abs_str
     end interface
 contains
-    function abs_str(a) result(abs_a)
+    pure elemental function abs_str(a) result(abs_a)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits) :: abs_a

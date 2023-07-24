@@ -7,7 +7,7 @@ module strith_arithmetic_basic_sub_lt0Lt0
     public :: sub_lt0_lt0
 
 contains
-    function sub_lt0_lt0(a, b) result(sub)
+    pure elemental function sub_lt0_lt0(a, b) result(sub)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

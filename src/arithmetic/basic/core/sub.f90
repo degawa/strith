@@ -6,7 +6,7 @@ module strith_arithmetic_basic_core_sub
     public :: sub_core
 
 contains
-    function sub_core(a, b) result(sub)
+    pure elemental function sub_core(a, b) result(sub)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

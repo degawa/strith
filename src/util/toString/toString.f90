@@ -18,7 +18,7 @@ module strith_util_toString
     end interface
 
     interface
-        subroutine Iudt_to_string(var, as_unsigned, str)
+        pure subroutine Iudt_to_string(var, as_unsigned, str)
             use :: strith_parameter, only:digits
             class(*), intent(in) :: var
             logical, intent(in) :: as_unsigned
@@ -29,7 +29,7 @@ module strith_util_toString
     logical, private, parameter :: remove_0_padding_default = .false.
     logical, private, parameter :: as_unsigned_default = .false.
 contains
-    function to_string_int8(i8, remove_0_padding, as_unsigned) result(str)
+    pure function to_string_int8(i8, remove_0_padding, as_unsigned) result(str)
         implicit none
         integer(int8), intent(in) :: i8
         logical, intent(in), optional :: remove_0_padding
@@ -60,7 +60,7 @@ contains
         end if
     end function to_string_int8
 
-    function to_string_int16(i16, remove_0_padding, as_unsigned) result(str)
+    pure function to_string_int16(i16, remove_0_padding, as_unsigned) result(str)
         implicit none
         integer(int16), intent(in) :: i16
         logical, intent(in), optional :: remove_0_padding
@@ -91,7 +91,7 @@ contains
         end if
     end function to_string_int16
 
-    function to_string_int32(i32, remove_0_padding, as_unsigned) result(str)
+    pure function to_string_int32(i32, remove_0_padding, as_unsigned) result(str)
         implicit none
         integer(int32), intent(in) :: i32
         logical, intent(in), optional :: remove_0_padding
@@ -122,7 +122,7 @@ contains
         end if
     end function to_string_int32
 
-    function to_string_int64(i64, remove_0_padding, as_unsigned) result(str)
+    pure function to_string_int64(i64, remove_0_padding, as_unsigned) result(str)
         implicit none
         integer(int64), intent(in) :: i64
         logical, intent(in), optional :: remove_0_padding
@@ -153,7 +153,7 @@ contains
         end if
     end function to_string_int64
 
-    function to_string_user_defined(var, udt_to_string, remove_0_padding, as_unsigned) result(str)
+    pure function to_string_user_defined(var, udt_to_string, remove_0_padding, as_unsigned) result(str)
         implicit none
         class(*), intent(in) :: var
         procedure(Iudt_to_string) :: udt_to_string
@@ -170,7 +170,7 @@ contains
         end if
     end function to_string_user_defined
 
-    logical function optval(x, default)
+    pure elemental logical function optval(x, default)
         implicit none
         logical, intent(in), optional :: x
         logical, intent(in) :: default

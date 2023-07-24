@@ -6,7 +6,7 @@ module strith_arithmetic_basic_add_ge0Ge0
     public :: add_ge0_ge0
 
 contains
-    function add_ge0_ge0(a, b) result(add)
+    pure elemental function add_ge0_ge0(a, b) result(add)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

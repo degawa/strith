@@ -16,7 +16,7 @@ module strith_arithmetic_basic_sub
     end interface
 
 contains
-    function sub_interface(a, b) result(sub)
+    pure elemental function sub_interface(a, b) result(sub)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

@@ -7,7 +7,7 @@ module strith_comparision_core_less
     public :: is_less_without_considering_sign
 
 contains
-    function is_less_without_considering_sign(a, b) result(is_less)
+    pure elemental function is_less_without_considering_sign(a, b) result(is_less)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

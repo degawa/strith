@@ -15,7 +15,7 @@ module strith_arithmetic_basic_add
         procedure :: add_interface
     end interface
 contains
-    function add_interface(a, b) result(add)
+    pure elemental function add_interface(a, b) result(add)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

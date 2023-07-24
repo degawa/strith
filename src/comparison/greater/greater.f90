@@ -19,7 +19,7 @@ module strith_comparision_greater
     end interface
 contains
     ! returns `.true.` if `a > b`
-    function is_greater_than(a, b) result(gt)
+    pure elemental function is_greater_than(a, b) result(gt)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b
@@ -46,7 +46,7 @@ contains
     end function is_greater_than
 
     ! returns `.true.` if `a >= b`
-    function is_greater_than_or_equal_to(a, b) result(ge)
+    pure elemental function is_greater_than_or_equal_to(a, b) result(ge)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

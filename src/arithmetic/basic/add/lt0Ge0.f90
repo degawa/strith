@@ -7,7 +7,7 @@ module strith_arithmetic_basic_add_lt0Ge0
     public :: add_lt0_ge0
 
 contains
-    function add_lt0_ge0(a, b) result(add)
+    pure elemental function add_lt0_ge0(a, b) result(add)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

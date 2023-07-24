@@ -8,7 +8,7 @@ module strith_arithmetic_unary_negate
         procedure :: negate_str
     end interface
 contains
-    function negate_str(a) result(minus_a)
+    pure elemental function negate_str(a) result(minus_a)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits) :: minus_a

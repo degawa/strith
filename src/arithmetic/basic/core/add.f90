@@ -6,7 +6,7 @@ module strith_arithmetic_basic_core_add
     public :: add_core
 
 contains
-    function add_core(a, b) result(add)
+    pure elemental function add_core(a, b) result(add)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

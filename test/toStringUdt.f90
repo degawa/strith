@@ -64,14 +64,14 @@ program test_toStringUdt
             "expected -000000000000000000000000000002147483648 but got "//str
     end if
 contains
-    subroutine do_nothing(var, as_unsigned, str)
+    pure subroutine do_nothing(var, as_unsigned, str)
         implicit none
         class(*), intent(in) :: var
         logical, intent(in) :: as_unsigned
         character(len=digits), intent(inout) :: str
     end subroutine do_nothing
 
-    subroutine return_minus_zero(var, as_unsigned, str)
+    pure subroutine return_minus_zero(var, as_unsigned, str)
         use :: strith_arithmetic_unary_negate
         implicit none
         class(*), intent(in) :: var
@@ -80,7 +80,7 @@ contains
         str = -zero
     end subroutine return_minus_zero
 
-    subroutine i32_to_string(var, as_unsigned, str)
+    pure subroutine i32_to_string(var, as_unsigned, str)
         use :: strith_arithmetic_unary_negate
         use :: strith_arithmetic_basic_add
         use :: strith_arithmetic_basic_sub
@@ -104,7 +104,7 @@ contains
         end select
     end subroutine i32_to_string
 
-    subroutine i32_to_string_unsigned(var, as_unsigned, str)
+    pure subroutine i32_to_string_unsigned(var, as_unsigned, str)
         use :: strith_arithmetic_unary_negate
         use :: strith_arithmetic_basic_add
         use :: strith_arithmetic_basic_sub

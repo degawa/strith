@@ -12,7 +12,7 @@ module strith_comparision_equal
         procedure :: is_not_equal
     end interface
 contains
-    logical function is_equal(a, b)
+    pure elemental logical function is_equal(a, b)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b
@@ -20,7 +20,7 @@ contains
         is_equal = (a == b)
     end function is_equal
 
-    logical function is_not_equal(a, b)
+    pure elemental logical function is_not_equal(a, b)
         implicit none
         character(len=digits), intent(in) :: a
         character(len=digits), intent(in) :: b

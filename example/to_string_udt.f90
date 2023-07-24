@@ -15,7 +15,7 @@ program to_string_udt
     print *, to_string(l, udt_to_string, remove_0_padding=.true., as_unsigned=.true.) ! 18446744073709551615
     print *, to_string(l, udt_to_string, remove_0_padding=.true.) ! -1
 contains
-    subroutine udt_to_string(var, as_unsigned, str)
+    pure subroutine udt_to_string(var, as_unsigned, str)
         implicit none
         class(*), intent(in) :: var
         logical, intent(in) :: as_unsigned

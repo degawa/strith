@@ -8,7 +8,7 @@ module strith_util_removeZeroPadding
     public :: remove_zero_padding
 
 contains
-    function remove_zero_padding(a) result(a_wo_0)
+    pure function remove_zero_padding(a) result(a_wo_0)
         implicit none
         character(len=digits), intent(in) :: a
         character(:), allocatable :: a_wo_0
