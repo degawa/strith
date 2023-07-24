@@ -15,7 +15,7 @@ module strith
     implicit none
     private
     ! user-defined type
-    public :: strint_type
+    public :: strint_type, new_strint
 
     ! utility procedures
     public :: to_string
