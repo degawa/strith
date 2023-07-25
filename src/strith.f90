@@ -4,6 +4,7 @@ module strith
     use :: strith_arithmetic_basic_sub
     use :: strith_arithmetic_unary_negate
     use :: strith_arithmetic_unary_abs
+    use :: strith_arithmetic_unary_sign
     use :: strith_comparision_equal
     use :: strith_comparision_greater
     use :: strith_comparision_less
@@ -30,6 +31,7 @@ module strith
     public :: operator(+)
     public :: operator(-)
     public :: abs
+    public :: sign
 
     ! comparators
     public :: operator(.stritheq.)
