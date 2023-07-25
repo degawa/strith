@@ -162,4 +162,6 @@ module strith_parameter
 
     character(len=digits), public, parameter :: zero = "+"//repeat("0", digits - 1)
         !! the constant representing 0
+    character(len=digits), public, parameter :: one = "+"//repeat("0", digits - 2)//"1"
+        !! the constant representing 1
 end module strith_parameter
