@@ -42,7 +42,7 @@ module strith
     ! parameters
     public :: weights_of_digits
     public :: digits
-    public :: zero
+    public :: zero, one
 
     ! interfaces
     public :: Iudt_to_string
