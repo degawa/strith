@@ -7,6 +7,7 @@ program test_typeStrint
     implicit none
 
     type(strint_type) :: a, b, c
+    character(len=digits) :: str_a, str_b
     character(:), allocatable :: str, expr
 
     ! to_string
@@ -453,5 +454,709 @@ program test_typeStrint
     else
         print '(A)', "🔥FAILED: abs(positive value) returns the positive value. "// &
             "expected +000000000000000000000000000000000000256 but got "//str
+    end if
+
+    !---
+    ! assign
+    a = weights_of_digits(127)
+    if (a%to_string() == "+170141183460469231731687303715884105728") then
+        print '(A)', "✅PASSED: assignment string to strint"
+    else
+        print '(A)', "🔥FAILED: assignment string to strint. "// &
+            "expected +170141183460469231731687303715884105728, but got ", a%to_string()
+    end if
+
+    !---
+    ! add strint + str
+    a = new_strint(weights_of_digits(127))
+    str_b = weights_of_digits(126)
+    c = a + str_b
+    str = c%to_string()
+    expr = "170141183460469231731687303715884105728+85070591730234615865843651857942052864&
+           &=255211775190703847597530955573826158592"
+    if (str == "+255211775190703847597530955573826158592") then
+        print '(A)', "✅PASSED: strint+str "//expr
+    else
+        print '(A)', "🔥FAILED: strint+str. expected "//expr//", but got ", str
+    end if
+
+    a = new_strint("-000000000000000000000000007420738134810")
+    str_b = "+000000000000000000000000152125131763605"
+    c = a + str_b
+    str = c%to_string()
+    expr = "-7420738134810+152125131763605=144704393628795"
+    if (str == "+000000000000000000000000144704393628795") then
+        print '(A)', "✅PASSED: strint+str "//expr
+    else
+        print '(A)', "🔥FAILED: strint+str. expected "//expr//", but got ", str
+    end if
+
+    a = new_strint(to_string(7))
+    str_b = -(to_string(101))
+    c = a + str_b
+    str = c%to_string()
+    expr = "7+-101=-94"
+    if (str == "-000000000000000000000000000000000000094") then
+        print '(A)', "✅PASSED: strint+str "//expr
+    else
+        print '(A)', "🔥FAILED: strint+str. expected "//expr//", but got ", str
+    end if
+
+    a = new_strint(-weights_of_digits(126))
+    str_b = -weights_of_digits(127)
+    c = a + str_b
+    str = c%to_string()
+    expr = "-170141183460469231731687303715884105728+-85070591730234615865843651857942052864&
+           &=-255211775190703847597530955573826158592"
+    if (str == "-255211775190703847597530955573826158592") then
+        print '(A)', "✅PASSED: strint+str "//expr
+    else
+        print '(A)', "🔥FAILED: strint+str. expected "//expr//", but got ", str
+    end if
+
+    ! add str + strint
+    str_a = weights_of_digits(127)
+    b = new_strint(weights_of_digits(126))
+    c = str_a + b
+    str = c%to_string()
+    expr = "170141183460469231731687303715884105728+85070591730234615865843651857942052864&
+           &=255211775190703847597530955573826158592"
+    if (str == "+255211775190703847597530955573826158592") then
+        print '(A)', "✅PASSED: str+strint "//expr
+    else
+        print '(A)', "🔥FAILED: str+strint. expected "//expr//", but got ", str
+    end if
+
+    str_a = "-000000000000000000000000007420738134810"
+    b = new_strint("+000000000000000000000000152125131763605")
+    c = str_a + b
+    str = c%to_string()
+    expr = "-7420738134810+152125131763605=144704393628795"
+    if (str == "+000000000000000000000000144704393628795") then
+        print '(A)', "✅PASSED: str+strint "//expr
+    else
+        print '(A)', "🔥FAILED: str+strint. expected "//expr//", but got ", str
+    end if
+
+    str_a = to_string(7)
+    b = new_strint(-(to_string(101)))
+    c = str_a + b
+    str = c%to_string()
+    expr = "7+-101=-94"
+    if (str == "-000000000000000000000000000000000000094") then
+        print '(A)', "✅PASSED: str+strint "//expr
+    else
+        print '(A)', "🔥FAILED: str+strint. expected "//expr//", but got ", str
+    end if
+
+    str_a = -weights_of_digits(126)
+    b = new_strint(-weights_of_digits(127))
+    c = str_a + b
+    str = c%to_string()
+    expr = "-170141183460469231731687303715884105728+-85070591730234615865843651857942052864&
+           &=-255211775190703847597530955573826158592"
+    if (str == "-255211775190703847597530955573826158592") then
+        print '(A)', "✅PASSED: str+strint "//expr
+    else
+        print '(A)', "🔥FAILED: str+strint. expected "//expr//", but got ", str
+    end if
+
+    !---
+    ! sub strint-str
+    a = new_strint(weights_of_digits(5))
+    str_b = weights_of_digits(3)
+    c = a - str_b
+    str = c%to_string()
+    expr = "32+8=24"
+    if (str == "+000000000000000000000000000000000000024") then
+        print '(A)', "✅PASSED: strint-str "//expr
+    else
+        print '(A)', "🔥FAILED: strint-str. expected "//expr//", but got ", str
+    end if
+
+    a = new_strint(weights_of_digits(10))
+    str_b = weights_of_digits(20)
+    c = a - str_b
+    str = c%to_string()
+    expr = "1024-1048576=-1047552"
+    if (str == "-000000000000000000000000000000001047552") then
+        print '(A)', "✅PASSED: strint-str "//expr
+    else
+        print '(A)', "🔥FAILED: strint-str. expected "//expr//", but got ", str
+    end if
+
+    a = new_strint(-weights_of_digits(127))
+    str_b = weights_of_digits(126)
+    c = a - str_b
+    str = c%to_string()
+    expr = "-170141183460469231731687303715884105728-85070591730234615865843651857942052864&
+           &=-255211775190703847597530955573826158592"
+    if (str == "-255211775190703847597530955573826158592") then
+        print '(A)', "✅PASSED: strint-str "//expr
+    else
+        print '(A)', "🔥FAILED: strint-str. expected "//expr//", but got ", str
+    end if
+
+    a = new_strint("+000000000000000000000000007420738134810")
+    str_b = "-000000000000000000000000152125131763605"
+    c = a - str_b
+    str = c%to_string()
+    expr = "7420738134810--152125131763605=159545869898415"
+    if (str == "+000000000000000000000000159545869898415") then
+        print '(A)', "✅PASSED: strint-str "//expr
+    else
+        print '(A)', "🔥FAILED: strint-str. expected "//expr//", but got ", str
+    end if
+
+    a = new_strint(-weights_of_digits(127))
+    str_b = -weights_of_digits(126)
+    c = a - str_b
+    str = c%to_string()
+    expr = "-170141183460469231731687303715884105728--85070591730234615865843651857942052864&
+           &=-85070591730234615865843651857942052864"
+    if (str == "-085070591730234615865843651857942052864") then
+        print '(A)', "✅PASSED: strint-str "//expr
+    else
+        print '(A)', "🔥FAILED: strint-str. expected "//expr//", but got ", str
+    end if
+
+    ! sub str-strint
+    str_a = weights_of_digits(5)
+    b = new_strint(weights_of_digits(3))
+    c = str_a - b
+    str = c%to_string()
+    expr = "32+8=24"
+    if (str == "+000000000000000000000000000000000000024") then
+        print '(A)', "✅PASSED: str-strint "//expr
+    else
+        print '(A)', "🔥FAILED: str-strint. expected "//expr//", but got ", str
+    end if
+
+    str_a = weights_of_digits(10)
+    b = new_strint(weights_of_digits(20))
+    c = str_a - b
+    str = c%to_string()
+    expr = "1024-1048576=-1047552"
+    if (str == "-000000000000000000000000000000001047552") then
+        print '(A)', "✅PASSED: str-strint "//expr
+    else
+        print '(A)', "🔥FAILED: str-strint. expected "//expr//", but got ", str
+    end if
+
+    str_a = -weights_of_digits(127)
+    b = new_strint(weights_of_digits(126))
+    c = str_a - b
+    str = c%to_string()
+    expr = "-170141183460469231731687303715884105728-85070591730234615865843651857942052864&
+           &=-255211775190703847597530955573826158592"
+    if (str == "-255211775190703847597530955573826158592") then
+        print '(A)', "✅PASSED: str-strint "//expr
+    else
+        print '(A)', "🔥FAILED: str-strint. expected "//expr//", but got ", str
+    end if
+
+    str_a = "+000000000000000000000000007420738134810"
+    b = new_strint("-000000000000000000000000152125131763605")
+    c = str_a - b
+    str = c%to_string()
+    expr = "7420738134810--152125131763605=159545869898415"
+    if (str == "+000000000000000000000000159545869898415") then
+        print '(A)', "✅PASSED: str-strint "//expr
+    else
+        print '(A)', "🔥FAILED: str-strint. expected "//expr//", but got ", str
+    end if
+
+    str_a = -weights_of_digits(127)
+    b = new_strint(-weights_of_digits(126))
+    c = str_a - b
+    str = c%to_string()
+    expr = "-170141183460469231731687303715884105728--85070591730234615865843651857942052864&
+           &=-85070591730234615865843651857942052864"
+    if (str == "-085070591730234615865843651857942052864") then
+        print '(A)', "✅PASSED: str-strint "//expr
+    else
+        print '(A)', "🔥FAILED: str-strint. expected "//expr//", but got ", str
+    end if
+
+    !---
+    ! equal strint==str
+    a = new_strint(weights_of_digits(3))
+    str_b = weights_of_digits(3)
+    if (a == str_b) then
+        print '(A)', "✅PASSED: strint==str 8==8 is .true."
+    else
+        print '(A)', "🔥FAILED: strint==str. expect that 8==8 is .true., but got .false."
+    end if
+
+    a = new_strint(weights_of_digits(3))
+    str_b = weights_of_digits(4)
+    if ((a == str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint==str 8==16 is .false."
+    else
+        print '(A)', "🔥FAILED: strint==str. expect that 8==16 is .false., but got .true."
+    end if
+
+    a = new_strint(weights_of_digits(4))
+    str_b = -weights_of_digits(4)
+    if ((a == str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint==str 16==-16 is .false."
+    else
+        print '(A)', "🔥FAILED: strint==str. expect that 16==-16 is .false., but got .true."
+    end if
+
+    ! equal str==strint
+    str_a = weights_of_digits(3)
+    b = new_strint(weights_of_digits(3))
+    if (str_a == b) then
+        print '(A)', "✅PASSED: str==strint 8==8 is .true."
+    else
+        print '(A)', "🔥FAILED: str==strint. expect that 8==8 is .true., but got .false."
+    end if
+
+    str_a = weights_of_digits(3)
+    b = new_strint(weights_of_digits(4))
+    if ((str_a == b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str==strint 8==16 is .false."
+    else
+        print '(A)', "🔥FAILED: str==strint. expect that 8==16 is .false., but got .true."
+    end if
+
+    str_a = weights_of_digits(4)
+    b = new_strint(-weights_of_digits(4))
+    if ((str_a == b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str==strint 16==-16 is .false."
+    else
+        print '(A)', "🔥FAILED: str==strint. expect that 16==-16 is .false., but got .true."
+    end if
+
+    !---
+    ! not equal strint/=str
+    a = new_strint(weights_of_digits(4))
+    str_b = -weights_of_digits(4)
+    if (a /= str_b) then
+        print '(A)', "✅PASSED: strint/=str 16/=-16 is .true."
+    else
+        print '(A)', "🔥FAILED: strint/=str. expect that 16/=-16 is .true., but got .false."
+    end if
+
+    a = new_strint(weights_of_digits(3))
+    str_b = weights_of_digits(3)
+    if ((a /= str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint/=str 8/=8 is .false."
+    else
+        print '(A)', "🔥FAILED: strint/=str. xpect that 8/=8 is .true., but got .false."
+    end if
+
+    ! not equal str/=strint
+    str_a = weights_of_digits(4)
+    b = new_strint(-weights_of_digits(4))
+    if (str_a /= b) then
+        print '(A)', "✅PASSED: str/=strint 16/=-16 is .true."
+    else
+        print '(A)', "🔥FAILED: str/=strint. expect that 16/=-16 is .true., but got .false."
+    end if
+
+    str_a = weights_of_digits(3)
+    b = new_strint(weights_of_digits(3))
+    if ((str_a /= b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str/=strint 8/=8 is .false."
+    else
+        print '(A)', "🔥FAILED: str/=strint. xpect that 8/=8 is .true., but got .false."
+    end if
+
+    !---
+    ! greater strint>str
+    a = new_strint(weights_of_digits(3))
+    str_b = weights_of_digits(2)
+    if (a > str_b) then
+        print '(A)', "✅PASSED: strint>str 8>4 is .true."
+    else
+        print '(A)', "🔥FAILED: strint>str. expect that 8>4 is .true., but got .false."
+    end if
+
+    a = new_strint(weights_of_digits(2))
+    str_b = weights_of_digits(3)
+    if ((a > str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint>str 4>8 is .false."
+    else
+        print '(A)', "🔥FAILED: strint>str. expect that 4>8 is .false., but got .true."
+    end if
+
+    a = new_strint(weights_of_digits(3))
+    str_b = weights_of_digits(3)
+    if ((a > str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint>str 8>8 is .false."
+    else
+        print '(A)', "🔥FAILED: strint>str. expect that 8>8 is .false., but got .true."
+    end if
+
+    a = new_strint(-weights_of_digits(2))
+    str_b = -weights_of_digits(3)
+    if ((a > str_b) .eqv. .true.) then
+        print '(A)', "✅PASSED: strint>str -4>-8 is .true."
+    else
+        print '(A)', "🔥FAILED: strint>str. expect that -4>-8 is .true., but got .false."
+    end if
+
+    a = new_strint(-weights_of_digits(3))
+    str_b = -weights_of_digits(2)
+    if ((a > str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint>str -8>-4 is .false."
+    else
+        print '(A)', "🔥FAILED: strint>str. expect that -8>-4 is .false., but got .true."
+    end if
+
+    a = new_strint(-weights_of_digits(3))
+    str_b = -weights_of_digits(3)
+    if ((a > str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint>str -8>-8 is .false."
+    else
+        print '(A)', "🔥FAILED: strint>str. expect that -8>-8 is .false., but got .true."
+    end if
+
+    ! greater str>strint
+    str_a = weights_of_digits(3)
+    b = new_strint(weights_of_digits(2))
+    if (str_a > b) then
+        print '(A)', "✅PASSED: str>strint 8>4 is .true."
+    else
+        print '(A)', "🔥FAILED: str>strint. expect that 8>4 is .true., but got .false."
+    end if
+
+    str_a = weights_of_digits(2)
+    b = new_strint(weights_of_digits(3))
+    if ((str_a > b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str>strint 4>8 is .false."
+    else
+        print '(A)', "🔥FAILED: str>strint. expect that 4>8 is .false., but got .true."
+    end if
+
+    str_a = weights_of_digits(3)
+    b = new_strint(weights_of_digits(3))
+    if ((str_a > b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str>strint 8>8 is .false."
+    else
+        print '(A)', "🔥FAILED: str>strint. expect that 8>8 is .false., but got .true."
+    end if
+
+    str_a = -weights_of_digits(2)
+    b = -new_strint(weights_of_digits(3))
+    if ((str_a > b) .eqv. .true.) then
+        print '(A)', "✅PASSED: str>strint -4>-8 is .true."
+    else
+        print '(A)', "🔥FAILED: str>strint. expect that -4>-8 is .true., but got .false."
+    end if
+
+    str_a = -weights_of_digits(3)
+    b = new_strint(-weights_of_digits(2))
+    if ((str_a > b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str>strint -8>-4 is .false."
+    else
+        print '(A)', "🔥FAILED: str>strint. expect that -8>-4 is .false., but got .true."
+    end if
+
+    str_a = -weights_of_digits(3)
+    b = new_strint(-weights_of_digits(3))
+    if ((str_a > b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str>strint -8>-8 is .false."
+    else
+        print '(A)', "🔥FAILED: str>strint. expect that -8>-8 is .false., but got .true."
+    end if
+
+    !---
+    ! greater than or equal to strint>=str
+    a = new_strint(weights_of_digits(3))
+    str_b = weights_of_digits(2)
+    if (a >= str_b) then
+        print '(A)', "✅PASSED: strint>=str 8>=4 is .true."
+    else
+        print '(A)', "🔥FAILED: strint>=str. expect that 8>=4 is .true., but got .false."
+    end if
+
+    a = new_strint(weights_of_digits(2))
+    str_b = weights_of_digits(3)
+    if ((a >= str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint>=str 4>=8 is .false."
+    else
+        print '(A)', "🔥FAILED: strint>=str. expect that 4>=8 is .false., but got .true."
+    end if
+
+    a = new_strint(weights_of_digits(3))
+    str_b = weights_of_digits(3)
+    if ((a >= str_b) .eqv. .true.) then
+        print '(A)', "✅PASSED: strint>=str 8>=8 is .true."
+    else
+        print '(A)', "🔥FAILED: strint>=str. expect that 8>=8 is .true., but got .false."
+    end if
+
+    a = new_strint(-weights_of_digits(2))
+    str_b = -weights_of_digits(3)
+    if ((a >= str_b) .eqv. .true.) then
+        print '(A)', "✅PASSED: strint>=str -4>=-8 is .true."
+    else
+        print '(A)', "🔥FAILED: strint>=str. expect that -4>=-8 is .true., but got .false."
+    end if
+
+    a = new_strint(-weights_of_digits(3))
+    str_b = -weights_of_digits(2)
+    if ((a >= str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint>=str -8>=-4 is .false."
+    else
+        print '(A)', "🔥FAILED: strint>=str. expect that -8>=-4 is .false., but got .true."
+    end if
+
+    a = new_strint(-weights_of_digits(3))
+    str_b = -weights_of_digits(3)
+    if ((a >= str_b) .eqv. .true.) then
+        print '(A)', "✅PASSED: strint>=str -8>=-8 is .true."
+    else
+        print '(A)', "🔥FAILED: strint>=str. expect that -8>=-8 is .true., but got .false."
+    end if
+
+    ! greater than or equal to str>=strint
+    str_a = weights_of_digits(3)
+    b = new_strint(weights_of_digits(2))
+    if (str_a >= b) then
+        print '(A)', "✅PASSED: str>=strint 8>=4 is .true."
+    else
+        print '(A)', "🔥FAILED: str>=strint. expect that 8>=4 is .true., but got .false."
+    end if
+
+    str_a = weights_of_digits(2)
+    b = new_strint(weights_of_digits(3))
+    if ((str_a >= b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str>=strint 4>=8 is .false."
+    else
+        print '(A)', "🔥FAILED: str>=strint. expect that 4>=8 is .false., but got .true."
+    end if
+
+    str_a = weights_of_digits(3)
+    b = new_strint(weights_of_digits(3))
+    if ((str_a >= b) .eqv. .true.) then
+        print '(A)', "✅PASSED: str>=strint 8>=8 is .true."
+    else
+        print '(A)', "🔥FAILED: str>=strint. expect that 8>=8 is .true., but got .false."
+    end if
+
+    str_a = -weights_of_digits(2)
+    b = new_strint(-weights_of_digits(3))
+    if ((str_a >= b) .eqv. .true.) then
+        print '(A)', "✅PASSED: str>=strint -4>=-8 is .true."
+    else
+        print '(A)', "🔥FAILED: str>=strint. expect that -4>=-8 is .true., but got .false."
+    end if
+
+    str_a = -weights_of_digits(3)
+    b = new_strint(-weights_of_digits(2))
+    if ((str_a >= b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str>=strint -8>=-4 is .false."
+    else
+        print '(A)', "🔥FAILED: str>=strint. expect that -8>=-4 is .false., but got .true."
+    end if
+
+    str_a = -weights_of_digits(3)
+    b = new_strint(-weights_of_digits(3))
+    if ((str_a >= b) .eqv. .true.) then
+        print '(A)', "✅PASSED: str>=strint -8>=-8 is .true."
+    else
+        print '(A)', "🔥FAILED: str>=strint. expect that -8>=-8 is .true., but got .false."
+    end if
+
+    !---
+    ! less strint<str
+    a = new_strint(weights_of_digits(3))
+    str_b = weights_of_digits(4)
+    if ((a < str_b)) then
+        print '(A)', "✅PASSED: strint<str 8<16 is .true."
+    else
+        print '(A)', "🔥FAILED: strint<str. expect that 8<16 is .true., but got .false."
+    end if
+
+    a = new_strint(weights_of_digits(4))
+    str_b = weights_of_digits(3)
+    if ((a < str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint<str 16<8 is .false."
+    else
+        print '(A)', "🔥FAILED: strint<str. expect that 16<8 is .false., but got .true."
+    end if
+
+    a = new_strint(weights_of_digits(3))
+    str_b = weights_of_digits(3)
+    if ((a < str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint<str 8<8 is .false."
+    else
+        print '(A)', "🔥FAILED: strint<str. expect that 8<8 is .false., but got .true."
+    end if
+
+    a = new_strint(-weights_of_digits(4))
+    str_b = -weights_of_digits(3)
+    if ((a < str_b) .eqv. .true.) then
+        print '(A)', "✅PASSED: strint<str -16<-8 is .true."
+    else
+        print '(A)', "🔥FAILED: strint<str. expect that -16<-8 is .true., but got .false."
+    end if
+
+    a = new_strint(-weights_of_digits(3))
+    str_b = -weights_of_digits(4)
+    if ((a < str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint<str -8<-16 is .false."
+    else
+        print '(A)', "🔥FAILED: strint<str. expect that -8<-16 is .false., but got .true."
+    end if
+
+    a = new_strint(-weights_of_digits(3))
+    str_b = -weights_of_digits(3)
+    if ((a < str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint<str -8<-8 is .false."
+    else
+        print '(A)', "🔥FAILED: strint<str. expect that -8<-8 is .false., but got .true."
+    end if
+
+    ! less str<strint
+    str_a = weights_of_digits(3)
+    b = new_strint(weights_of_digits(4))
+    if ((str_a < b)) then
+        print '(A)', "✅PASSED: str<strint 8<16 is .true."
+    else
+        print '(A)', "🔥FAILED: str<strint. expect that 8<16 is .true., but got .false."
+    end if
+
+    str_a = weights_of_digits(4)
+    b = new_strint(weights_of_digits(3))
+    if ((str_a < b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str<strint 16<8 is .false."
+    else
+        print '(A)', "🔥FAILED: str<strint. expect that 16<8 is .false., but got .true."
+    end if
+
+    str_a = weights_of_digits(3)
+    b = new_strint(weights_of_digits(3))
+    if ((str_a < b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str<strint 8<8 is .false."
+    else
+        print '(A)', "🔥FAILED: str<strint. expect that 8<8 is .false., but got .true."
+    end if
+
+    str_a = -weights_of_digits(4)
+    b = new_strint(-weights_of_digits(3))
+    if ((str_a < b) .eqv. .true.) then
+        print '(A)', "✅PASSED: str<strint -16<-8 is .true."
+    else
+        print '(A)', "🔥FAILED: str<strint. expect that -16<-8 is .true., but got .false."
+    end if
+
+    str_a = -weights_of_digits(3)
+    b = new_strint(-weights_of_digits(4))
+    if ((str_a < b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str<strint -8<-16 is .false."
+    else
+        print '(A)', "🔥FAILED: str<strint. expect that -8<-16 is .false., but got .true."
+    end if
+
+    str_a = -weights_of_digits(3)
+    b = new_strint(-weights_of_digits(3))
+    if ((str_a < b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str<strint -8<-8 is .false."
+    else
+        print '(A)', "🔥FAILED: str<strint. expect that -8<-8 is .false., but got .true."
+    end if
+
+    !---
+    ! less than or equal to strint<=str
+    a = new_strint(weights_of_digits(3))
+    str_b = weights_of_digits(4)
+    if ((a <= str_b)) then
+        print '(A)', "✅PASSED: strint<=str 8<=16 is .true."
+    else
+        print '(A)', "🔥FAILED: strint<=str. expect that 8<=16 is .true., but got .false."
+    end if
+
+    a = new_strint(weights_of_digits(4))
+    str_b = weights_of_digits(3)
+    if ((a <= str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint<=str 16<=8 is .false."
+    else
+        print '(A)', "🔥FAILED: strint<=str. expect that 16<=8 is .false., but got .true."
+    end if
+
+    a = new_strint(weights_of_digits(3))
+    str_b = weights_of_digits(3)
+    if ((a <= str_b) .eqv. .true.) then
+        print '(A)', "✅PASSED: strint<=str 8<=8 is .true."
+    else
+        print '(A)', "🔥FAILED: strint<=str. expect that 8<=8 is .true., but got .false."
+    end if
+
+    a = new_strint(-weights_of_digits(4))
+    str_b = -weights_of_digits(3)
+    if ((a <= str_b) .eqv. .true.) then
+        print '(A)', "✅PASSED: strint<=str -16<=-8 is .true."
+    else
+        print '(A)', "🔥FAILED: strint<=str. expect that -16<=-8 is .true., but got .false."
+    end if
+
+    a = new_strint(-weights_of_digits(3))
+    str_b = -weights_of_digits(4)
+    if ((a <= str_b) .eqv. .false.) then
+        print '(A)', "✅PASSED: strint<=str -8<=-16 is .false."
+    else
+        print '(A)', "🔥FAILED: strint<=str. expect that -8<=-16 is .false., but got .true."
+    end if
+
+    a = new_strint(-weights_of_digits(3))
+    str_b = -weights_of_digits(3)
+    if ((a <= str_b) .eqv. .true.) then
+        print '(A)', "✅PASSED: strint<=str -8<=-8 is .true."
+    else
+        print '(A)', "🔥FAILED: strint<=str. expect that -8<=-8 is .true., but got .false."
+    end if
+
+    ! less than or equal to str<=strint
+    str_a = weights_of_digits(3)
+    b = new_strint(weights_of_digits(4))
+    if ((str_a <= b)) then
+        print '(A)', "✅PASSED: str<=strint 8<=16 is .true."
+    else
+        print '(A)', "🔥FAILED: str<=strint. expect that 8<=16 is .true., but got .false."
+    end if
+
+    str_a = weights_of_digits(4)
+    b = new_strint(weights_of_digits(3))
+    if ((str_a <= b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str<=strint 16<=8 is .false."
+    else
+        print '(A)', "🔥FAILED: str<=strint. expect that 16<=8 is .false., but got .true."
+    end if
+
+    str_a = weights_of_digits(3)
+    b = new_strint(weights_of_digits(3))
+    if ((str_a <= b) .eqv. .true.) then
+        print '(A)', "✅PASSED: str<=strint 8<=8 is .true."
+    else
+        print '(A)', "🔥FAILED: str<=strint. expect that 8<=8 is .true., but got .false."
+    end if
+
+    str_a = -weights_of_digits(4)
+    b = new_strint(-weights_of_digits(3))
+    if ((str_a <= b) .eqv. .true.) then
+        print '(A)', "✅PASSED: str<=strint -16<=-8 is .true."
+    else
+        print '(A)', "🔥FAILED: str<=strint. expect that -16<=-8 is .true., but got .false."
+    end if
+
+    str_a = -weights_of_digits(3)
+    b = new_strint(-weights_of_digits(4))
+    if ((str_a <= b) .eqv. .false.) then
+        print '(A)', "✅PASSED: str<=strint -8<=-16 is .false."
+    else
+        print '(A)', "🔥FAILED: str<=strint. expect that -8<=-16 is .false., but got .true."
+    end if
+
+    str_a = -weights_of_digits(3)
+    b = new_strint(-weights_of_digits(3))
+    if ((str_a <= b) .eqv. .true.) then
+        print '(A)', "✅PASSED: str<=strint -8<=-8 is .true."
+    else
+        print '(A)', "🔥FAILED: str<=strint. expect that -8<=-8 is .true., but got .false."
     end if
 end program test_typeStrint
