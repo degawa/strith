@@ -1,6 +1,7 @@
 module strith_type_strint
     use, intrinsic :: iso_fortran_env
     use :: strith_parameter
+    use :: strith_util_isValid
     implicit none
     private
     public :: new_strint
@@ -9,26 +10,60 @@ module strith_type_strint
     type, public :: strint_type
         character(len=digits), private :: str = zero
     contains
-        procedure, public, pass :: to_string
+        procedure, public, pass(a) :: to_string
 
-        procedure, public, pass :: add
-        procedure, public, pass :: sub
-        procedure, public, pass :: negate
-        generic :: operator(+) => add
-        generic :: operator(-) => sub, negate
+        procedure, public, pass(lhs) :: assign_str
+        generic :: assignment(=) => assign_str
 
-        procedure, public, pass :: equal
-        procedure, public, pass :: not_equal
-        procedure, public, pass :: greater_than
-        procedure, public, pass :: greater_than_or_equal_to
-        procedure, public, pass :: less_than
-        procedure, public, pass :: less_than_or_equal_to
-        generic :: operator(==) => equal
-        generic :: operator(/=) => not_equal
-        generic :: operator(>) => greater_than
-        generic :: operator(>=) => greater_than_or_equal_to
-        generic :: operator(<) => less_than
-        generic :: operator(<=) => less_than_or_equal_to
+        procedure, public, pass(a) :: add
+        procedure, public, pass(a) :: sub
+        procedure, public, pass(a) :: negate
+        procedure, public, pass(a) :: add_str
+        procedure, public, pass(b) :: r_add_str
+        procedure, public, pass(a) :: sub_str
+        procedure, public, pass(b) :: r_sub_str
+        generic :: operator(+) => add, add_str, r_add_str
+        generic :: operator(-) => sub, sub_str, r_sub_str, &
+                                  negate !&
+
+        procedure, public, pass(a) :: equal
+        procedure, public, pass(a) :: not_equal
+        procedure, public, pass(a) :: greater_than
+        procedure, public, pass(a) :: greater_than_or_equal_to
+        procedure, public, pass(a) :: less_than
+        procedure, public, pass(a) :: less_than_or_equal_to
+        procedure, public, pass(a) :: equal_str
+        procedure, public, pass(b) :: r_equal_str
+        procedure, public, pass(a) :: not_equal_str
+        procedure, public, pass(b) :: r_not_equal_str
+        procedure, public, pass(a) :: greater_than_str
+        procedure, public, pass(b) :: r_greater_than_str
+        procedure, public, pass(a) :: greater_than_or_equal_to_str
+        procedure, public, pass(b) :: r_greater_than_or_equal_to_str
+        procedure, public, pass(a) :: less_than_str
+        procedure, public, pass(b) :: r_less_than_str
+        procedure, public, pass(a) :: less_than_or_equal_to_str
+        procedure, public, pass(b) :: r_less_than_or_equal_to_str
+        !&<
+        generic :: operator(==) => equal, &
+                                   equal_str, &
+                                   r_equal_str
+        generic :: operator(/=) => not_equal, &
+                                   not_equal_str, &
+                                   r_not_equal_str
+        generic :: operator(>)  => greater_than, &
+                                   greater_than_str, &
+                                   r_greater_than_str
+        generic :: operator(>=) => greater_than_or_equal_to, &
+                                   greater_than_or_equal_to_str, &
+                                   r_greater_than_or_equal_to_str
+        generic :: operator(<)  => less_than, &
+                                   less_than_str, &
+                                   r_less_than_str
+        generic :: operator(<=) => less_than_or_equal_to, &
+                                   less_than_or_equal_to_str, &
+                                   r_less_than_or_equal_to_str
+        !&>
     end type strint_type
 
     interface new_strint
@@ -88,6 +123,7 @@ contains
         if (is_valid(str)) then
             strint%str = str
         else
+            strint%str = zero
         end if
     end function construct_strint_str
 
@@ -104,6 +140,19 @@ contains
             if (remove_0_padding) str = remove_zero_padding(str)
         end if
     end function to_string
+
+    subroutine assign_str(lhs, rhs)
+        use :: strith_util_isValid
+        implicit none
+        class(strint_type), intent(out) :: lhs
+        character(len=digits), intent(in) :: rhs
+
+        if (is_valid(rhs)) then
+            lhs%str = rhs
+        else
+            lhs%str = zero
+        end if
+    end subroutine assign_str
 
     pure elemental function add(a, b) result(c)
         use :: strith_arithmetic_basic_add
@@ -196,4 +245,209 @@ contains
 
         abs_a%str = abs(a%str)
     end function abs_strint
+
+    !------------------------------------------------------------------!
+    pure elemental function add_str(a, b) result(c)
+        use :: strith_arithmetic_basic_add
+        implicit none
+        class(strint_type), intent(in) :: a
+        character(len=digits), intent(in) :: b
+        type(strint_type) :: c
+
+        if (is_valid(b)) then
+            c%str = a%str + b
+        else
+            c%str = zero
+        end if
+    end function add_str
+
+    pure elemental function r_add_str(a, b) result(c)
+        use :: strith_arithmetic_basic_add
+        implicit none
+        character(len=digits), intent(in) :: a
+        class(strint_type), intent(in) :: b
+        type(strint_type) :: c
+
+        if (is_valid(a)) then
+            c%str = a + b%str
+        else
+            c%str = zero
+        end if
+    end function r_add_str
+
+    pure elemental function sub_str(a, b) result(c)
+        use :: strith_arithmetic_basic_sub
+        implicit none
+        class(strint_type), intent(in) :: a
+        character(len=digits), intent(in) :: b
+        type(strint_type) :: c
+
+        if (is_valid(b)) then
+            c%str = a%str - b
+        else
+            c%str = zero
+        end if
+    end function sub_str
+
+    pure elemental function r_sub_str(a, b) result(c)
+        use :: strith_arithmetic_basic_sub
+        implicit none
+        character(len=digits), intent(in) :: a
+        class(strint_type), intent(in) :: b
+        type(strint_type) :: c
+
+        if (is_valid(a)) then
+            c%str = a - b%str
+        else
+            c%str = zero
+        end if
+    end function r_sub_str
+
+    pure elemental logical function equal_str(a, b)
+        use :: strith_comparision_equal
+        implicit none
+        class(strint_type), intent(in) :: a
+        character(len=digits), intent(in) :: b
+
+        if (is_valid(b)) then
+            equal_str = (a%str .stritheq. b) !&
+        else
+            equal_str = .false.
+        end if
+    end function equal_str
+
+    pure elemental logical function r_equal_str(a, b)
+        use :: strith_comparision_equal
+        implicit none
+        character(len=digits), intent(in) :: a
+        class(strint_type), intent(in) :: b
+
+        if (is_valid(a)) then
+            r_equal_str = (a .stritheq. b%str) !&
+        else
+            r_equal_str = .false.
+        end if
+    end function r_equal_str
+
+    pure elemental logical function not_equal_str(a, b)
+        use :: strith_comparision_equal
+        implicit none
+        class(strint_type), intent(in) :: a
+        character(len=digits), intent(in) :: b
+
+        not_equal_str = .not. (a == b)
+    end function not_equal_str
+
+    pure elemental logical function r_not_equal_str(a, b)
+        use :: strith_comparision_equal
+        implicit none
+        character(len=digits), intent(in) :: a
+        class(strint_type), intent(in) :: b
+
+        r_not_equal_str = .not. (a == b)
+    end function r_not_equal_str
+
+    pure elemental logical function greater_than_str(a, b)
+        use :: strith_comparision_greater
+        implicit none
+        class(strint_type), intent(in) :: a
+        character(len=digits), intent(in) :: b
+
+        if (is_valid(b)) then
+            greater_than_str = (a%str .strithgt. b) !&
+        else
+            greater_than_str = .false.
+        end if
+    end function greater_than_str
+
+    pure elemental logical function r_greater_than_str(a, b)
+        use :: strith_comparision_greater
+        implicit none
+        character(len=digits), intent(in) :: a
+        class(strint_type), intent(in) :: b
+
+        if (is_valid(a)) then
+            r_greater_than_str = (a .strithgt. b%str) !&
+        else
+            r_greater_than_str = .false.
+        end if
+    end function r_greater_than_str
+
+    pure elemental logical function greater_than_or_equal_to_str(a, b)
+        use :: strith_comparision_greater
+        implicit none
+        class(strint_type), intent(in) :: a
+        character(len=digits), intent(in) :: b
+
+        if (is_valid(b)) then
+            greater_than_or_equal_to_str = (a%str .strithge. b) !&
+        else
+            greater_than_or_equal_to_str = .false.
+        end if
+    end function greater_than_or_equal_to_str
+
+    pure elemental logical function r_greater_than_or_equal_to_str(a, b)
+        use :: strith_comparision_greater
+        implicit none
+        character(len=digits), intent(in) :: a
+        class(strint_type), intent(in) :: b
+
+        if (is_valid(a)) then
+            r_greater_than_or_equal_to_str = (a.strithge.b%str)
+        else
+            r_greater_than_or_equal_to_str = .false.
+        end if
+    end function r_greater_than_or_equal_to_str
+
+    pure elemental logical function less_than_str(a, b)
+        use :: strith_comparision_less
+        implicit none
+        class(strint_type), intent(in) :: a
+        character(len=digits), intent(in) :: b
+
+        if (is_valid(b)) then
+            less_than_str = (a%str .strithlt. b) !&
+        else
+            less_than_str = .false.
+        end if
+    end function less_than_str
+
+    pure elemental logical function r_less_than_str(a, b)
+        use :: strith_comparision_less
+        implicit none
+        character(len=digits), intent(in) :: a
+        class(strint_type), intent(in) :: b
+
+        if (is_valid(a)) then
+            r_less_than_str = (a .strithlt. b%str) !&
+        else
+            r_less_than_str = .false.
+        end if
+    end function r_less_than_str
+
+    pure elemental logical function less_than_or_equal_to_str(a, b)
+        use :: strith_comparision_less
+        implicit none
+        class(strint_type), intent(in) :: a
+        character(len=digits), intent(in) :: b
+
+        if (is_valid(b)) then
+            less_than_or_equal_to_str = (a%str .strithle. b) !&
+        else
+            less_than_or_equal_to_str = .false.
+        end if
+    end function less_than_or_equal_to_str
+
+    pure elemental logical function r_less_than_or_equal_to_str(a, b)
+        use :: strith_comparision_less
+        implicit none
+        character(len=digits), intent(in) :: a
+        class(strint_type), intent(in) :: b
+
+        if (is_valid(a)) then
+            r_less_than_or_equal_to_str = (a .strithle. b%str) !&
+        else
+            r_less_than_or_equal_to_str = .false.
+        end if
+    end function r_less_than_or_equal_to_str
 end module strith_type_strint
