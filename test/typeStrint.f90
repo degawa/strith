@@ -233,7 +233,7 @@ program test_typeStrint
     a = new_strint(weights_of_digits(3))
     b = new_strint(weights_of_digits(3))
     if ((a /= b) .eqv. .false.) then
-        print '(A)', "✅PASSED: 8/=8 is .true."
+        print '(A)', "✅PASSED: 8/=8 is .false."
     else
         print '(A)', "🔥FAILED: expect that 8/=8 is .true., but got .false."
     end if
