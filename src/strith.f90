@@ -8,6 +8,8 @@ module strith
     use :: strith_comparision_equal
     use :: strith_comparision_greater
     use :: strith_comparision_less
+    use :: strith_comparision_max
+    use :: strith_comparision_min
     use :: strith_util_toString
     use :: strith_util_toInt
     use :: strith_util_isValid
@@ -40,6 +42,7 @@ module strith
     public :: operator(.strithge.)
     public :: operator(.strithlt.)
     public :: operator(.strithle.)
+    public :: min, max
 
     ! parameters
     public :: weights_of_digits
