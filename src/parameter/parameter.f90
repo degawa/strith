@@ -164,4 +164,34 @@ module strith_parameter
         !! the constant representing 0
     character(len=digits), public, parameter :: one = "+"//repeat("0", digits - 2)//"1"
         !! the constant representing 1
+    character(len=digits), public, parameter :: int8_max = "+000000000000000000000000000000000000127"
+        !! the constant representing huge(int8)
+    character(len=digits), public, parameter :: int8_min = "-000000000000000000000000000000000000128"
+        !! the constant representing -huge(int8)
+    character(len=digits), public, parameter :: uint8_max = "+000000000000000000000000000000000000256"
+        !! the constant representing maximum value of unsigned int8
+    character(len=digits), public, parameter :: int16_max = "+000000000000000000000000000000000032767"
+        !! the constant representing huge(int16)
+    character(len=digits), public, parameter :: int16_min = "-000000000000000000000000000000000032768"
+        !! the constant representing -huge(int16)
+    character(len=digits), public, parameter :: uint16_max = "+000000000000000000000000000000000065536"
+        !! the constant representing maximum value of unsigned int16
+    character(len=digits), public, parameter :: int32_max = "+000000000000000000000000000002147483647"
+        !! the constant representing huge(int32)
+    character(len=digits), public, parameter :: int32_min = "-000000000000000000000000000002147483648"
+        !! the constant representing -huge(int32)
+    character(len=digits), public, parameter :: uint32_max = "+000000000000000000000000000004294967296"
+        !! the constant representing maximum value of unsigned int32
+    character(len=digits), public, parameter :: int64_max = "+000000000000000000009223372036854775807"
+        !! the constant representing huge(int64)
+    character(len=digits), public, parameter :: int64_min = "-000000000000000000009223372036854775808"
+        !! the constant representing -huge(int64)
+    character(len=digits), public, parameter :: uint64_max = "+000000000000000000018446744073709551616"
+        !! the constant representing maximum value of unsigned int64
+    character(len=digits), public, parameter :: int128_max = "+170141183460469231731687303715884105727"
+        !! the constant representing huge(int128)
+    character(len=digits), public, parameter :: int128_min = "-170141183460469231731687303715884105728"
+        !! the constant representing -huge(int128)
+    character(len=digits), public, parameter :: uint128_max = "+340282366920938463463374607431768211456"
+        !! the constant representing maximum value of unsigned int128
 end module strith_parameter
