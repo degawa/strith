@@ -1,4 +1,4 @@
-program to_string_udt
+program ex_to_string_udt
     use, intrinsic :: iso_fortran_env
     use :: strith
     implicit none
@@ -49,4 +49,4 @@ contains
             end if
         end select
     end subroutine udt_to_string
-end program to_string_udt
+end program ex_to_string_udt
