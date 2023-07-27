@@ -30,6 +30,7 @@ module strith
     public :: remove_zero_padding
 
     ! operators
+    public :: assignment(=)
     public :: operator(+)
     public :: operator(-)
     public :: abs

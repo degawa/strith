@@ -7,14 +7,12 @@ module strith_type_strint
     public :: new_strint
     public :: abs
     public :: min, max
+    public :: assignment(=)
 
     type, public :: strint_type
         character(len=digits), private :: str = zero
     contains
         procedure, public, pass(a) :: to_string
-
-        procedure, public, pass(lhs) :: assign_str
-        generic :: assignment(=) => assign_str
 
         procedure, public, pass(a) :: add
         procedure, public, pass(a) :: sub
@@ -73,6 +71,10 @@ module strith_type_strint
         procedure :: construct_strint_i32
         procedure :: construct_strint_i64
         procedure :: construct_strint_str
+    end interface
+
+    interface assignment(=)
+        procedure :: assign_str
     end interface
 
     interface abs
@@ -154,10 +156,10 @@ contains
         end if
     end function to_string
 
-    subroutine assign_str(lhs, rhs)
+    pure elemental subroutine assign_str(lhs, rhs)
         use :: strith_util_isValid
         implicit none
-        class(strint_type), intent(out) :: lhs
+        type(strint_type), intent(out) :: lhs
         character(len=digits), intent(in) :: rhs
 
         if (is_valid(rhs)) then
