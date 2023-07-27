@@ -20,6 +20,8 @@ program test_typeStrint
     call test_less()
     call test_abs()
     call test_assign()
+    call test_min()
+    call test_max()
 
 contains
     subroutine test_to_string()
@@ -1192,4 +1194,342 @@ contains
                 "expected +170141183460469231731687303715884105728, but got ", a%to_string()
         end if
     end subroutine test_assign
+
+    subroutine test_min()
+        ! min
+        a = new_strint(weights_of_digits(3))
+        b = new_strint(weights_of_digits(4))
+        c = min(a, b)
+        if (c == a) then
+            print '(A)', "✅PASSED: min(8, 16) returns 8"
+        else
+            print '(A)', "🔥FAILED: expect that min(8, 16) returns 8, but got "//c%to_string()
+        end if
+
+        a = new_strint(weights_of_digits(4))
+        b = new_strint(weights_of_digits(3))
+        c = min(a, b)
+        if (c == b) then
+            print '(A)', "✅PASSED: min(16, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: expect that min(16, 8) returns 8, but got "//c%to_string()
+        end if
+
+        a = new_strint(weights_of_digits(3))
+        b = new_strint(weights_of_digits(3))
+        c = min(a, b)
+        if (c == a .and. c == b) then
+            print '(A)', "✅PASSED: min(8, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: expect that min(8, 8) returns 8, but got "//c%to_string()
+        end if
+
+        a = new_strint(-weights_of_digits(4))
+        b = new_strint(-weights_of_digits(3))
+        c = min(a, b)
+        if (c == a) then
+            print '(A)', "✅PASSED: min(-16, -8) returns -16"
+        else
+            print '(A)', "🔥FAILED: expect that min(-16, -8) returns -16, but got "//c%to_string()
+        end if
+
+        a = new_strint(-weights_of_digits(3))
+        b = new_strint(-weights_of_digits(4))
+        c = min(a, b)
+        if (c == b) then
+            print '(A)', "✅PASSED: min(-8, -16) returns -16"
+        else
+            print '(A)', "🔥FAILED: expect that min(-8, -16) returns -16, but got "//c%to_string()
+        end if
+
+        a = new_strint(-weights_of_digits(3))
+        b = new_strint(-weights_of_digits(3))
+        c = min(a, b)
+        if (c == a .and. c == b) then
+            print '(A)', "✅PASSED: min(-8, -8) returns -8"
+        else
+            print '(A)', "🔥FAILED: expect that min(-8, -8) returns -8, but got "//c%to_string()
+        end if
+
+        !---
+        ! min(strint, str)
+        a = new_strint(weights_of_digits(3))
+        str_b = weights_of_digits(4)
+        c = min(a, str_b)
+        if (c == a) then
+            print '(A)', "✅PASSED: min(strint, str) min(8, 16) returns 8"
+        else
+            print '(A)', "🔥FAILED: min(strint, str). expect that min(8, 16) returns 8, but got "//c%to_string()
+        end if
+
+        a = new_strint(weights_of_digits(4))
+        str_b = weights_of_digits(3)
+        c = min(a, str_b)
+        if (c == str_b) then
+            print '(A)', "✅PASSED: min(strint, str) min(16, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: min(strint, str). expect that min(16, 8) returns 8, but got "//c%to_string()
+        end if
+
+        a = new_strint(weights_of_digits(3))
+        str_b = weights_of_digits(3)
+        c = min(a, str_b)
+        if (c == a .and. c == str_b) then
+            print '(A)', "✅PASSED: min(strint, str) min(8, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: min(strint, str). expect that min(8, 8) returns 8, but got "//c%to_string()
+        end if
+
+        a = new_strint(-weights_of_digits(4))
+        str_b = -weights_of_digits(3)
+        c = min(a, str_b)
+        if (c == a) then
+            print '(A)', "✅PASSED: min(strint, str) min(-16, -8) returns -16"
+        else
+            print '(A)', "🔥FAILED: min(strint, str). expect that min(-16, -8) returns -16, but got "//c%to_string()
+        end if
+
+        a = new_strint(-weights_of_digits(3))
+        str_b = -weights_of_digits(4)
+        c = min(a, str_b)
+        if (c == str_b) then
+            print '(A)', "✅PASSED: min(strint, str) min(-8, -16) returns -16"
+        else
+            print '(A)', "🔥FAILED: min(strint, str). expect that min(-8, -16) returns -16, but got "//c%to_string()
+        end if
+
+        a = new_strint(-weights_of_digits(3))
+        str_b = -weights_of_digits(3)
+        c = min(a, str_b)
+        if (c == a .and. c == str_b) then
+            print '(A)', "✅PASSED: min(strint, str) min(-8, -8) returns -8"
+        else
+            print '(A)', "🔥FAILED: min(strint, str). expect that min(-8, -8) returns -8, but got "//c%to_string()
+        end if
+
+        !---
+        ! min(str, strint)
+        str_a = weights_of_digits(3)
+        b = new_strint(weights_of_digits(4))
+        c = min(str_a, b)
+        if (c == str_a) then
+            print '(A)', "✅PASSED: min(str, strint) min(8, 16) returns 8"
+        else
+            print '(A)', "🔥FAILED: min(str, strint). expect that min(8, 16) returns 8, but got "//c%to_string()
+        end if
+
+        str_a = weights_of_digits(4)
+        b = new_strint(weights_of_digits(3))
+        c = min(str_a, b)
+        if (c == b) then
+            print '(A)', "✅PASSED: min(str, strint) min(16, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: min(str, strint). expect that min(16, 8) returns 8, but got "//c%to_string()
+        end if
+
+        str_a = weights_of_digits(3)
+        b = new_strint(weights_of_digits(3))
+        c = min(str_a, b)
+        if (c == str_a .and. c == b) then
+            print '(A)', "✅PASSED: min(str, strint) min(8, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: min(str, strint). expect that min(8, 8) returns 8, but got "//c%to_string()
+        end if
+
+        str_a = -weights_of_digits(4)
+        b = new_strint(-weights_of_digits(3))
+        c = min(str_a, b)
+        if (c == str_a) then
+            print '(A)', "✅PASSED: min(str, strint) min(-16, -8) returns -16"
+        else
+            print '(A)', "🔥FAILED: min(str, strint). expect that min(-16, -8) returns -16, but got "//c%to_string()
+        end if
+
+        str_a = -weights_of_digits(3)
+        b = new_strint(-weights_of_digits(4))
+        c = min(str_a, b)
+        if (c == b) then
+            print '(A)', "✅PASSED: min(str, strint) min(-8, -16) returns -16"
+        else
+            print '(A)', "🔥FAILED: min(str, strint). expect that min(-8, -16) returns -16, but got "//c%to_string()
+        end if
+
+        str_a = -weights_of_digits(3)
+        b = new_strint(-weights_of_digits(3))
+        c = min(str_a, b)
+        if (c == str_a .and. c == b) then
+            print '(A)', "✅PASSED: min(str, strint) min(-8, -8) returns -8"
+        else
+            print '(A)', "🔥FAILED: min(str, strint). expect that min(-8, -8) returns -8, but got "//c%to_string()
+        end if
+    end subroutine test_min
+
+    subroutine test_max()
+        ! max
+        a = weights_of_digits(3)
+        b = weights_of_digits(2)
+        c = max(a, b)
+        if (c == a) then
+            print '(A)', "✅PASSED: max(8, 4) returns 8"
+        else
+            print '(A)', "🔥FAILED: expect that max(8, 4) returns 8, but got "//c%to_string()
+        end if
+
+        a = weights_of_digits(2)
+        b = weights_of_digits(3)
+        c = max(a, b)
+        if (c == b) then
+            print '(A)', "✅PASSED: max(4, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: expect that max(4, 8) returns 8, but got "//c%to_string()
+        end if
+
+        a = weights_of_digits(3)
+        b = weights_of_digits(3)
+        c = max(a, b)
+        if (c == b .and. c == a) then
+            print '(A)', "✅PASSED: max(8, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: expect that max(8, 8) returns 8, but got "//c%to_string()
+        end if
+
+        a = -weights_of_digits(2)
+        b = -weights_of_digits(3)
+        c = max(a, b)
+        if (c == a) then
+            print '(A)', "✅PASSED: max(-4, -8) returns -4"
+        else
+            print '(A)', "🔥FAILED: expect that max(-4, -8) returns -4, but got "//c%to_string()
+        end if
+
+        a = -weights_of_digits(3)
+        b = -weights_of_digits(2)
+        c = max(a, b)
+        if (c == b) then
+            print '(A)', "✅PASSED: max(-8, -4) returns -4"
+        else
+            print '(A)', "🔥FAILED: expect that max(-8, -4) returns -4, but got "//c%to_string()
+        end if
+
+        a = -weights_of_digits(3)
+        b = -weights_of_digits(3)
+        c = max(a, b)
+        if (c == a .and. c == b) then
+            print '(A)', "✅PASSED: max(-4, -4) returns -4"
+        else
+            print '(A)', "🔥FAILED: expect that max(-4, -4) returns -4, but got "//c%to_string()
+        end if
+
+        !---
+        ! max(strint, str)
+        a = new_strint(weights_of_digits(3))
+        str_b = weights_of_digits(2)
+        c = max(a, str_b)
+        if (c == a) then
+            print '(A)', "✅PASSED: max(strint, str) max(8, 4) returns 8"
+        else
+            print '(A)', "🔥FAILED: max(strint, str). expect that max(8, 4) returns 8, but got "//c%to_string()
+        end if
+
+        a = new_strint(weights_of_digits(2))
+        str_b = weights_of_digits(3)
+        c = max(a, str_b)
+        if (c == str_b) then
+            print '(A)', "✅PASSED: max(strint, str) max(4, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: max(strint, str). expect that max(4, 8) returns 8, but got "//c%to_string()
+        end if
+
+        a = new_strint(weights_of_digits(3))
+        str_b = weights_of_digits(3)
+        c = max(a, str_b)
+        if (c == str_b .and. c == a) then
+            print '(A)', "✅PASSED: max(strint, str) max(8, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: max(strint, str). expect that max(8, 8) returns 8, but got "//c%to_string()
+        end if
+
+        a = new_strint(-weights_of_digits(2))
+        str_b = -weights_of_digits(3)
+        c = max(a, str_b)
+        if (c == a) then
+            print '(A)', "✅PASSED: max(strint, str) max(-4, -8) returns -4"
+        else
+            print '(A)', "🔥FAILED: max(strint, str). expect that max(-4, -8) returns -4, but got "//c%to_string()
+        end if
+
+        a = new_strint(-weights_of_digits(3))
+        str_b = -weights_of_digits(2)
+        c = max(a, str_b)
+        if (c == str_b) then
+            print '(A)', "✅PASSED: max(strint, str) max(-8, -4) returns -4"
+        else
+            print '(A)', "🔥FAILED: max(strint, str). expect that max(-8, -4) returns -4, but got "//c%to_string()
+        end if
+
+        a = new_strint(-weights_of_digits(3))
+        str_b = -weights_of_digits(3)
+        c = max(a, str_b)
+        if (c == a .and. c == str_b) then
+            print '(A)', "✅PASSED: max(strint, str) max(-4, -4) returns -4"
+        else
+            print '(A)', "🔥FAILED: max(strint, str). expect that max(-4, -4) returns -4, but got "//c%to_string()
+        end if
+
+        !---
+        ! max(str, strint)
+        str_a = weights_of_digits(3)
+        b = new_strint(weights_of_digits(2))
+        c = max(str_a, b)
+        if (c == str_a) then
+            print '(A)', "✅PASSED: max(str, strint) max(8, 4) returns 8"
+        else
+            print '(A)', "🔥FAILED: max(str, strint). expect that max(8, 4) returns 8, but got "//c%to_string()
+        end if
+
+        str_a = weights_of_digits(2)
+        b = new_strint(weights_of_digits(3))
+        c = max(str_a, b)
+        if (c == b) then
+            print '(A)', "✅PASSED: max(str, strint) max(4, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: max(str, strint). expect that max(4, 8) returns 8, but got "//c%to_string()
+        end if
+
+        str_a = weights_of_digits(3)
+        b = new_strint(weights_of_digits(3))
+        c = max(str_a, b)
+        if (c == b .and. c == str_a) then
+            print '(A)', "✅PASSED: max(str, strint) max(8, 8) returns 8"
+        else
+            print '(A)', "🔥FAILED: max(str, strint). expect that max(8, 8) returns 8, but got "//c%to_string()
+        end if
+
+        str_a = -weights_of_digits(2)
+        b = new_strint(-weights_of_digits(3))
+        c = max(str_a, b)
+        if (c == str_a) then
+            print '(A)', "✅PASSED: max(str, strint) max(-4, -8) returns -4"
+        else
+            print '(A)', "🔥FAILED: max(str, strint). expect that max(-4, -8) returns -4, but got "//c%to_string()
+        end if
+
+        str_a = -weights_of_digits(3)
+        b = new_strint(-weights_of_digits(2))
+        c = max(str_a, b)
+        if (c == b) then
+            print '(A)', "✅PASSED: max(str, strint) max(-8, -4) returns -4"
+        else
+            print '(A)', "🔥FAILED: max(str, strint). expect that max(-8, -4) returns -4, but got "//c%to_string()
+        end if
+
+        str_a = -weights_of_digits(3)
+        b = new_strint(-weights_of_digits(3))
+        c = max(str_a, b)
+        if (c == str_a .and. c == b) then
+            print '(A)', "✅PASSED: max(str, strint) max(-4, -4) returns -4"
+        else
+            print '(A)', "🔥FAILED: max(str, strint). expect that max(-4, -4) returns -4, but got "//c%to_string()
+        end if
+    end subroutine test_max
 end program test_typeStrint
