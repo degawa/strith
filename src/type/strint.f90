@@ -6,6 +6,7 @@ module strith_type_strint
     private
     public :: new_strint
     public :: abs
+    public :: min, max
 
     type, public :: strint_type
         character(len=digits), private :: str = zero
@@ -76,6 +77,18 @@ module strith_type_strint
 
     interface abs
         procedure :: abs_strint
+    end interface
+
+    interface min
+        procedure :: min_strint
+        procedure :: min_strint_str
+        procedure :: min_str_strint
+    end interface
+
+    interface max
+        procedure :: max_strint
+        procedure :: max_strint_str
+        procedure :: max_str_strint
     end interface
 contains
     pure elemental function construct_strint_i8(i8) result(strint)
@@ -245,6 +258,26 @@ contains
 
         abs_a%str = abs(a%str)
     end function abs_strint
+
+    pure elemental function max_strint(a, b) result(max_)
+        use :: strith_comparision_max
+        implicit none
+        class(strint_type), intent(in) :: a
+        class(strint_type), intent(in) :: b
+        type(strint_type) :: max_
+
+        max_%str = max(a%str, b%str)
+    end function max_strint
+
+    pure elemental function min_strint(a, b) result(min_)
+        use :: strith_comparision_min
+        implicit none
+        class(strint_type), intent(in) :: a
+        class(strint_type), intent(in) :: b
+        type(strint_type) :: min_
+
+        min_%str = min(a%str, b%str)
+    end function min_strint
 
     !------------------------------------------------------------------!
     pure elemental function add_str(a, b) result(c)
@@ -450,4 +483,44 @@ contains
             r_less_than_or_equal_to_str = .false.
         end if
     end function r_less_than_or_equal_to_str
+
+    pure elemental function max_strint_str(a, b) result(max_)
+        use :: strith_comparision_max
+        implicit none
+        class(strint_type), intent(in) :: a
+        character(len=digits), intent(in) :: b
+        type(strint_type) :: max_
+
+        max_%str = max(a%str, b)
+    end function max_strint_str
+
+    pure elemental function max_str_strint(a, b) result(max_)
+        use :: strith_comparision_max
+        implicit none
+        character(len=digits), intent(in) :: a
+        class(strint_type), intent(in) :: b
+        type(strint_type) :: max_
+
+        max_ = max_strint_str(b, a)
+    end function max_str_strint
+
+    pure elemental function min_strint_str(a, b) result(min_)
+        use :: strith_comparision_min
+        implicit none
+        class(strint_type), intent(in) :: a
+        character(len=digits), intent(in) :: b
+        type(strint_type) :: min_
+
+        min_%str = min(a%str, b)
+    end function min_strint_str
+
+    pure elemental function min_str_strint(a, b) result(min_)
+        use :: strith_comparision_min
+        implicit none
+        character(len=digits), intent(in) :: a
+        class(strint_type), intent(in) :: b
+        type(strint_type) :: min_
+
+        min_ = min_strint_str(b, a)
+    end function min_str_strint
 end module strith_type_strint
