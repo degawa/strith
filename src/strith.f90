@@ -48,6 +48,10 @@ module strith
     public :: weights_of_digits
     public :: digits
     public :: zero, one
+    public :: int8_max, int8_min, uint8_max
+    public :: int16_max, int16_min, uint16_max
+    public :: int32_max, int32_min, uint32_max
+    public :: int64_max, int64_min, uint64_max
 
     ! interfaces
     public :: Iudt_to_string
