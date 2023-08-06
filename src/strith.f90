@@ -53,6 +53,7 @@ module strith
     public :: int16_max, int16_min, uint16_max
     public :: int32_max, int32_min, uint32_max
     public :: int64_max, int64_min, uint64_max
+    public :: int128_max, int128_min, uint128_max
 
     ! interfaces
     public :: Iudt_to_string
